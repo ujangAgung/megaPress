@@ -9,16 +9,13 @@ const User = (props) => {
     return (
         <>
             <Head>
-                <title>{props.title}</title>
-                <meta
-                    name="description"
-                    content="Mega Press adalah Penerbit buku di Indonesia yang berdiri pada Tahun 2022, yang sudah memiliki ISBN dan terdaftar sebagai Anggota IKAPI. Bertempatkan di Sumedang Bandung Jawa Barat Indonesia"
-                />
+                <title>props.title</title>
+                <meta name="description" content={props.description} />
                 <link rel="icon" href="/img/icons.png" />
             </Head>
             <Navbar />
             <Hero />
-            <BukuTerbaru />
+            <BukuTerbaru books={props.books} />
         </>
     );
 };

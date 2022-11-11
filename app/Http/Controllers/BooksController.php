@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Books;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BooksController extends Controller
 {
@@ -14,7 +15,11 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('User/index', [
+            'title' => 'Home',
+            'description' => "Mega Press adalah Penerbit buku di Indonesia yang berdiri pada Tahun 2022, yang sudah memiliki ISBN dan terdaftar sebagai Anggota IKAPI. Bertempatkan di Sumedang Bandung Jawa Barat Indonesia",
+            'books' => Books::all()
+        ]);
     }
 
     /**

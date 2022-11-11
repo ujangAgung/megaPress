@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\BooksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,18 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('User/index', [
-        'title' => 'Home',
-        'welcome' => 'Selamat Datang'
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('User/index', [
+//         'title' => 'Home',
+//         'welcome' => 'Selamat Datang',
+//         'judul' => 'Pembubaran Organisasi Kemasyarakatan Dari Belakang',
+//         'slug' => 'pembubaran-organisasi-kemasyarakatan',
+//         'harga' => 'Rp. ' . 115000,
+//         'deskripsi' => 'Pembubaran Ormas menimbulkan polemik di masyarakat, Salah satu yang menjadi permasalahan adalah peniadaan proses peradilan dalam rangkaian proses pembubaran organisasi kemasyarakatan. Padahal penyelenggaraan peradilan guna menegakkan hukum dan keadilan merupakan salah satu kunci atau pilar dalam negara hukum dan penegakan hak asasi manusia, mengingat organisasi masyarakat merupakan salah satu manifestasi hak konstitusional warga negara dalam bidang kebebasan berkumpul dan berserikat. Buku ini bertujuan untuk Ilmu Pengetahuan tentang pembubaran organisasi kemasyarakatan dalam sistem hukum di Indonesia yang menjamin kebebasan berserikat, berkumpul dan mengeluarkan pendapat sesuai dengan Undang-Undang Dasar Negara Republik Indonesia 1945. Dari Belakang'
+//     ]);
+// });
+
+Route::get('/', [BooksController::class, 'index']);
 
 Route::get('/katalog', function() {
     return Inertia::render('User/Katalog', [
