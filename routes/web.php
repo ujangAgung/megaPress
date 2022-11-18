@@ -35,6 +35,13 @@ Route::get('/katalog', function() {
     ]);
 });
 
+Route::get('/kontak', function ()
+{
+    return Inertia::render('User/Kontak', [
+        'title' => 'Kontak'
+    ]);
+});
+
 Route::get('/acakan', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

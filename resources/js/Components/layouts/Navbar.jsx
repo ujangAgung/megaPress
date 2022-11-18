@@ -18,19 +18,18 @@ const Navbar = () => {
                     <div className="w-5/12 flex items-center justify-end">
                         <ul className="flex space-x-10">
                             <li>
-                                <Link
-                                    href="/"
-                                    className="hover:underline hover:decoration-biru-logo font-semibold uppercase"
-                                >
+                                <Link href="/" className="navbar">
                                     Beranda
                                 </Link>
                             </li>
                             <li>
-                                <Link
-                                    href="/katalog"
-                                    className="hover:underline hover:decoration-biru-logo font-semibold uppercase"
-                                >
+                                <Link href="/katalog" className="navbar">
                                     Katalog
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/kontak" className="navbar">
+                                    Kontak
                                 </Link>
                             </li>
                         </ul>
