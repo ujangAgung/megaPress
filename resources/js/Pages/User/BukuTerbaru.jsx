@@ -15,17 +15,25 @@ const BukuTerbaru = (props) => {
                             <div
                                 className={
                                     i % 2 == 0
-                                        ? "flex flex-row-reverse mb-12"
-                                        : "flex mb-12"
+                                        ? "md:flex md:flex-row-reverse mb-5 md:mb-12"
+                                        : "md:flex mb-5 md:mb-12"
                                 }
                                 key={book.id}
                             >
-                                <div className="w-1/2 flex">
+                                <div className="w-full md:w-1/2 flex">
                                     <div className="m-auto">
+                                        <img
+                                            src="/img/buku1.png"
+                                            alt="Buku Pertama"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="p-6 md:w-1/2 flex">
+                                    <div className="m-auto text-center">
                                         <h4 className="text-3xl font-bold mb-10">
                                             {book.judul}
                                         </h4>
-                                        <p className="font-extralight mb-5">
+                                        <p className="font-extralight mb-5 text-justify">
                                             {book.sinopsis}
                                         </p>
                                         <a
@@ -35,14 +43,6 @@ const BukuTerbaru = (props) => {
                                         >
                                             Lihat
                                         </a>
-                                    </div>
-                                </div>
-                                <div className="w-1/2 flex">
-                                    <div className="m-auto">
-                                        <img
-                                            src="/img/buku1.png"
-                                            alt="Buku Pertama"
-                                        />
                                     </div>
                                 </div>
                             </div>

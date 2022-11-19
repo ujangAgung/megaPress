@@ -1,5 +1,6 @@
 import React from "react";
 import { Head } from "@inertiajs/inertia-react";
+import { Link } from "@inertiajs/inertia-react";
 
 import Navbar from "@/Components/layouts/Navbar";
 import Footer from "@/Components/layouts/Footer";
@@ -15,42 +16,50 @@ const Katalog = (props) => {
                 />
                 <link rel="icon" href="/img/icons.png" />
             </Head>
-            {/* <Navbar /> */}
+            <Navbar />
             <section className="bg-slate-100">
-                <div className="">
-                    <div className="container mx-auto flex min-h-screen bg-orange-300">
-                        <div className="w-3/12 relative bg-violet-400">
-                            <div className="sticky h-full w-full bg-black top-0 bottom-0">
-                                <h1 className="text-white">acalam</h1>
-                            </div>
+                <div className="container mx-auto min-h-screen text-center px-5 py-10">
+                    <h1 className="font-bold text-5xl uppercase mb-3">
+                        {props.title}
+                    </h1>
+                    <h5 className="font-semibold text-2xl uppercase mb-10">
+                        {props.title}
+                    </h5>
+                    <div className="grid grid-cols-2 gap-3">
+                        <div className="rounded-lg hover:shadow-xl pb-10">
+                            <img src="/img/buku1.png" alt="buku acakan" />
+                            <h5 className="text-xl font-bold uppercase">
+                                acakan
+                            </h5>
+                            <p className="font-semibold text-orange-logo mb-2">
+                                Rp. 54.000,-
+                            </p>
+                            <Link
+                                href="#"
+                                className="py-1 text-sm px-2 border border-orange-logo rounded-md hover:bg-orange-logo hover:text-white hover:shadow-xl"
+                            >
+                                Detail
+                            </Link>
                         </div>
-                        <div className="w-9/12 h-screen bg-yellow-400 grid grid-cols-3 mt-20">
-                            <div className="rounded-lg">
-                                <h1>Lorem, ipsum dolor.</h1>
-                            </div>
-                            <div className="rounded-lg">
-                                <h1>Lorem, ipsum dolor.</h1>
-                            </div>
-                            <div className="rounded-lg">
-                                <h1>Lorem, ipsum dolor.</h1>
-                            </div>
-                            <div className="rounded-lg">
-                                <h1>Lorem, ipsum dolor.</h1>
-                            </div>
-                            <div className="rounded-lg">
-                                <h1>Lorem, ipsum dolor.</h1>
-                            </div>
-                            <div className="rounded-lg">
-                                <h1>Lorem, ipsum dolor.</h1>
-                            </div>
-                            <div className="rounded-lg">
-                                <h1>Lorem, ipsum dolor.</h1>
-                            </div>
+                        <div className="rounded-lg hover:shadow-xl pb-10">
+                            <img src="/img/buku1.png" alt="buku acakan" />
+                            <h5 className="text-xl font-bold uppercase">
+                                acakan
+                            </h5>
+                            <p className="font-semibold text-orange-logo mb-2">
+                                Rp. 54.000,-
+                            </p>
+                            <Link
+                                href="#"
+                                className="py-1 text-sm px-2 border border-orange-logo rounded-md hover:bg-orange-logo hover:text-white hover:shadow-xl"
+                            >
+                                Detail
+                            </Link>
                         </div>
                     </div>
                 </div>
             </section>
-            {/* <Footer /> */}
+            <Footer />
         </>
     );
 };

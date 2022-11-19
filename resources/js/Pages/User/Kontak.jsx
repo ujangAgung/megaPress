@@ -26,8 +26,8 @@ const Kontak = (props) => {
                 <link rel="icon" href="/img/icons.png" />
             </Head>
             <Navbar />
-            <section className="bg-slate-100 pt-24">
-                <div className="container mx-auto">
+            <section className="bg-slate-100 pt-5 md:pt-24">
+                <div className="container mx-auto p-5">
                     <h1 className="uppercase text-center text-5xl mb-3 font-bold">
                         Kontak Kami
                     </h1>
@@ -46,7 +46,7 @@ const Kontak = (props) => {
                     <div>
                         <ul className="grid gap-5 grid-cols-1 md:grid-cols-4 md:grid-rows-2">
                             <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group hover:bg-orange-logo hover:cursor-pointer md:row-span-1 md:col-span-4">
-                                <div className="m-auto group-hover:text-white">
+                                <div className="m-auto group-hover:text-white text-center">
                                     <AiFillEnvironment className="w-16 h-16 mx-auto mb-2 " />
                                     <p>
                                         Jl. Raya Jatinangor, No 21 A, Cibeusi,
