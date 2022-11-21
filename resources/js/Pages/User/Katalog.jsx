@@ -6,6 +6,8 @@ import Navbar from "@/Components/layouts/Navbar";
 import Footer from "@/Components/layouts/Footer";
 
 const Katalog = (props) => {
+    // console.log(props.books);
+    const books = props.books;
     return (
         <>
             <Head>
@@ -25,37 +27,37 @@ const Katalog = (props) => {
                     <h5 className="font-semibold text-2xl uppercase mb-10">
                         {props.title}
                     </h5>
-                    <div className="grid grid-cols-2 gap-3">
-                        <div className="rounded-lg hover:shadow-xl pb-10">
-                            <img src="/img/buku1.png" alt="buku acakan" />
-                            <h5 className="text-xl font-bold uppercase">
-                                acakan
-                            </h5>
-                            <p className="font-semibold text-orange-logo mb-2">
-                                Rp. 54.000,-
-                            </p>
-                            <Link
-                                href="#"
-                                className="py-1 text-sm px-2 border border-orange-logo rounded-md hover:bg-orange-logo hover:text-white hover:shadow-xl"
-                            >
-                                Detail
-                            </Link>
-                        </div>
-                        <div className="rounded-lg hover:shadow-xl pb-10">
-                            <img src="/img/buku1.png" alt="buku acakan" />
-                            <h5 className="text-xl font-bold uppercase">
-                                acakan
-                            </h5>
-                            <p className="font-semibold text-orange-logo mb-2">
-                                Rp. 54.000,-
-                            </p>
-                            <Link
-                                href="#"
-                                className="py-1 text-sm px-2 border border-orange-logo rounded-md hover:bg-orange-logo hover:text-white hover:shadow-xl"
-                            >
-                                Detail
-                            </Link>
-                        </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3">
+                        {books ? (
+                            books.map((book, i) => {
+                                return (
+                                    <Link
+                                        href="#"
+                                        key={i}
+                                        className="rounded-lg hover:shadow-xl"
+                                    >
+                                        <div className="p-2">
+                                            <img
+                                                src="/img/buku1.png"
+                                                alt={book.slug}
+                                            />
+                                            <h5 className="text-md font-semibold uppercase">
+                                                {book.judul}
+                                            </h5>
+                                            <p className="font-bold text-orange-logo mb-2">
+                                                Rp. {book.harga},-
+                                            </p>
+                                        </div>
+                                    </Link>
+                                );
+                            })
+                        ) : (
+                            <div className="flex">
+                                <div className="m-auto">
+                                    <p>Buku Belum Tersedia</p>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>

@@ -22,6 +22,15 @@ class BooksController extends Controller
         ]);
     }
 
+    public function katalog()
+    {
+        return Inertia::render('User/Katalog', [
+            'title' => 'Katalog',
+            'description' => 'Katalog Buku',
+            'books' => Books::all()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

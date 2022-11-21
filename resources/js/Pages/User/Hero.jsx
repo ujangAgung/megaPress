@@ -4,8 +4,10 @@ const Hero = () => {
     return (
         <main className="hero">
             <div className="hero-container">
-                <div className="w-6/12 mx-auto">
-                    <h1 className="uppercase text-7xl font-bold">Mega Press</h1>
+                <div className="w-8/12 md:w-6/12 mx-auto">
+                    <h1 className="uppercase text-5xl md:text-7xl font-bold">
+                        Mega Press
+                    </h1>
                     <p className="mt-5 mb-10">
                         Mega Press adalah Penerbit buku di Indonesia yang
                         berdiri pada Tahun 2022, yang sudah memiliki ISBN dan

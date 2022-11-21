@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\BooksController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,18 +29,17 @@ use App\Http\Controllers\BooksController;
 // });
 
 Route::get('/', [BooksController::class, 'index']);
-
-Route::get('/katalog', function() {
-    return Inertia::render('User/Katalog', [
-        'title' => 'Katalog',
-    ]);
-});
+Route::get('/katalog', [BooksController::class, 'katalog']);
 
 Route::get('/kontak', function ()
 {
     return Inertia::render('User/Kontak', [
         'title' => 'Kontak'
     ]);
+});
+
+Route::get('/acakanlay', function () {
+    return Inertia::render('Admin/Index');
 });
 
 Route::get('/acakan', function () {
@@ -51,8 +51,17 @@ Route::get('/acakan', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function() {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+    
+    Route::get('/admin', function () {
+        return Inertia::render('Admin/Index', [
+            'auth' => auth()->user()
+        ]);
+    })->name('admin');
+});
+
 
 require __DIR__.'/auth.php';

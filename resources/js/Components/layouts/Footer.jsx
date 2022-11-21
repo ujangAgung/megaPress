@@ -14,8 +14,10 @@ const Footer = () => {
                 </Link>
                 <p className="font-light">
                     © 2022
-                    <strong className="font-bold uppercase">Mega Press</strong>,
-                    All rights reserved.
+                    <strong className="font-bold uppercase ml-2">
+                        Mega Press
+                    </strong>
+                    , All rights reserved.
                 </p>
             </div>
         </section>
