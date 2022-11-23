@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoriesRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class CategoriesController extends Controller
@@ -46,16 +47,10 @@ class CategoriesController extends Controller
      */
     public function store(StoreCategoriesRequest $request)
     {
-        // Categories::create([
-        //     'deskripsi' => $request->deskripsi
-        // ]);
-        // $categories = new Categories();
-        // $categories->deskripsi = $request->deskripsi;
-        // $categories->save();
-        // return redirect('/admin/kategori')->with('message', 'Data Berhasil Ditambah!');
-        Categories::create(
-            $request->validated()
-        );
+        $categories = new Categories();
+        $categories->deskripsi = $request->deskripsi;
+        $categories->slug = Str::slug($request->deskripsi, '-');
+        $categories->save();
 
         return Redirect::route('admin.kategori');
     }
@@ -68,7 +63,7 @@ class CategoriesController extends Controller
      */
     public function show(Categories $categories)
     {
-        //
+        return Inertia::render('Admin/ShowKategori');
     }
 
     /**
@@ -102,6 +97,10 @@ class CategoriesController extends Controller
      */
     public function destroy(Categories $categories)
     {
-        //
+        // dd($categories);
+        $categories->delete();
+        return Redirect::back()->with('message', 'Kategori Dihapus.');
+        // $categories->delete();
+        // return Redirect::route('admin.kategori');
     }
 }

@@ -48,9 +48,13 @@ Route::middleware(['auth', 'verified'])->group(function() {
     
     Route::get('/admin', [BooksController::class, 'indexAdmin']);
     Route::get('/admin/tambah-buku', [BooksController::class, 'create']);
+
+    // kategori Admin
     Route::get('/admin/kategori', [CategoriesController::class, 'index'])->name('admin.kategori');
     Route::post('/admin/kategori', [CategoriesController::class, 'store'])->name('admin.kategori.store');
     Route::get('/admin/tambah-kategori', [CategoriesController::class, 'create']);
+    Route::get('/admin/kategori/{slug}/edit', [CategoriesController::class, 'edit'])->name('admin.kategori.edit');
+    Route::delete('/admin/kategori/{kategori}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
     // Route::resource('/admin/', PostController::class);
 });
 

@@ -24,7 +24,8 @@ class StoreCategoriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'deskripsi' => 'required'
+            'deskripsi' => 'required',
+            // 'slug' => 'required',
         ];
     }
 }
