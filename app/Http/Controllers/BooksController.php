@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Books;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
@@ -22,11 +23,22 @@ class BooksController extends Controller
         ]);
     }
 
+    public function indexAdmin()
+    {
+        // dd(auth()->user());
+        return Inertia::render('Admin/Index', [
+            'title' => 'Daftar Buku',
+            'auth' => auth()->user(),
+            'books' => Books::all()
+        ]);
+    }
+
     public function katalog()
     {
         return Inertia::render('User/Katalog', [
             'title' => 'Katalog',
             'description' => 'Katalog Buku',
+            // 'auth' => auth()->user(),
             'books' => Books::all()
         ]);
     }
@@ -38,7 +50,10 @@ class BooksController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/TambahBuku', [
+            'title' => 'Tambah Buku',
+            'auth' => auth()->user(),
+        ]);
     }
 
     /**
@@ -49,7 +64,7 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**

@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('halaman');
             $table->string('keterangan');
             $table->text('sinopsis');
-            $table->string('kategori');
-            $table->string('tag');
+            $table->string('kategori')->nullable();
+            $table->string('tag')->nullable();
             $table->timestamps();
         });
     }

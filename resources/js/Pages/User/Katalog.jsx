@@ -20,7 +20,7 @@ const Katalog = (props) => {
             </Head>
             <Navbar />
             <section className="bg-slate-100">
-                <div className="container mx-auto min-h-screen text-center px-5 py-10">
+                <div className="container mx-auto min-h-screen text-center px-5 py-10 md:mt-20">
                     <h1 className="font-bold text-5xl uppercase mb-3">
                         {props.title}
                     </h1>
@@ -28,7 +28,7 @@ const Katalog = (props) => {
                         {props.title}
                     </h5>
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3">
-                        {books ? (
+                        {books.length > 0 ? (
                             books.map((book, i) => {
                                 return (
                                     <Link
@@ -52,10 +52,8 @@ const Katalog = (props) => {
                                 );
                             })
                         ) : (
-                            <div className="flex">
-                                <div className="m-auto">
-                                    <p>Buku Belum Tersedia</p>
-                                </div>
+                            <div className="m-auto">
+                                <p>Buku Belum Tersedia</p>
                             </div>
                         )}
                     </div>

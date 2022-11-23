@@ -8,7 +8,7 @@ const BukuTerbaru = (props) => {
                 <h2 className="uppercase text-5xl text-center font-bold mb-20">
                     buku terbaru
                 </h2>
-                {books ? (
+                {books.length > 0 ? (
                     books.map((book, i) => {
                         const pesan = `https://web.whatsapp.com/send?phone=6281995877769&text=Hai%2C+Saya+akan+membeli%3A%0D%0A%0D%0A*${book.judul}*%0A*Harga:*%20${book.harga}%0A*URL:*%20https%3A%2F%2Fmegapress.com%2Fproduk%2F${book.slug}%2F%0D%0A%0D%0ATerima+kasih%21`;
                         return (

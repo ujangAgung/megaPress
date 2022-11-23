@@ -3,8 +3,8 @@ import { Link, Head } from "@inertiajs/inertia-react";
 
 import AdminLayout from "@/Layouts/AdminLayout";
 
-const Index = (props) => {
-    const Books = props.books;
+const Kategori = (props) => {
+    const Categories = props.kategori;
     return (
         <>
             <Head>
@@ -13,39 +13,35 @@ const Index = (props) => {
             <AdminLayout auth={props.auth}>
                 <div className="container mx-auto">
                     <h2 className="text-5xl font-bold mt-10 mb-5">
-                        Daftar Buku
+                        Daftar Kategori
                     </h2>
 
                     <Link
-                        href="/admin/tambah-buku"
+                        href="/admin/tambah-kategori"
                         className="py-2 px-3 font-bold border rounded-xl shadow-2xl border-orange-logo hover:bg-orange-logo hover:text-white"
                     >
-                        Tambah Buku
+                        Tambah Kategori
                     </Link>
                     <table className="w-full table-auto mt-5">
                         <thead>
                             <tr>
                                 <th className="p-2">No.</th>
-                                <th className="p-2">Gambar</th>
-                                <th className="p-2">Judul</th>
-                                <th className="p-2">Detail</th>
+                                <th className="p-2">Deskripsi</th>
+                                <th className="p-2">Aksi</th>
                             </tr>
                         </thead>
                         <tbody className="text-center space-y-6">
-                            {Books
-                                ? Books.map((book, i) => {
+                            {Categories.length > 0
+                                ? Categories.map((category, i) => {
                                       i++;
                                       return (
                                           <tr
-                                              key={book.id}
+                                              key={category.id}
                                               className="hover:bg-white hover:cursor-pointer"
                                           >
                                               <th className="py-1">{i}</th>
                                               <td className="py-1">
-                                                  {book.gambar}
-                                              </td>
-                                              <td className="py-1">
-                                                  {book.judul}
+                                                  {category.deskripsi}
                                               </td>
                                               <td className="py-1">
                                                   <Link
@@ -64,7 +60,7 @@ const Index = (props) => {
                                           </tr>
                                       );
                                   })
-                                : "Tidak ada buku"}
+                                : "Belum ada Kategori"}
                         </tbody>
                     </table>
                 </div>
@@ -73,4 +69,4 @@ const Index = (props) => {
     );
 };
 
-export default Index;
+export default Kategori;

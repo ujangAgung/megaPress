@@ -9,9 +9,9 @@ const Navbar = () => {
                     <div className="w-7/12">
                         <Link href="/">
                             <img
-                                src="/img/logo.jpg"
+                                src="/img/logo.png"
                                 alt="Nusa Agency"
-                                className="w-11"
+                                className="w-10"
                             />
                         </Link>
                     </div>
@@ -43,7 +43,7 @@ const Navbar = () => {
                         <li>
                             <Link href="/">
                                 <img
-                                    src="/img/logo.jpg"
+                                    src="/img/logo.png"
                                     alt="Mega Press"
                                     className="w-11"
                                 />

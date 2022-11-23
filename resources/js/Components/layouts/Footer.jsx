@@ -7,9 +7,9 @@ const Footer = () => {
             <div className="text-center">
                 <Link href="/">
                     <img
-                        src="/img/logo.jpg"
+                        src="/img/logo.png"
                         alt="Logo"
-                        className="w-12 mb-2 md:w-16 mx-auto"
+                        className="w-11 mb-2 md:w-16 mx-auto"
                     />
                 </Link>
                 <p className="font-light">
