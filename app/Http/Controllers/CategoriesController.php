@@ -72,9 +72,15 @@ class CategoriesController extends Controller
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categories $categories)
+    public function edit(Categories $categories, $slug)
     {
-        //
+        // $acakan = new Categories();
+        // dd($acakan);
+        $data =  Categories::where('slug', $slug)->first();
+        return Inertia::render('Admin/editKategori', [
+            'title' => 'Edit Kategori',
+            'data' => $data
+        ]);
     }
 
     /**
@@ -86,7 +92,12 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categories $categories)
     {
-        //
+        Categories::where('id' , $request->id)->update([
+            'deskripsi' => $request->deskripsi,
+            'slug' => Str::slug($request->deskripsi, '-')
+        ]);
+
+        return Redirect::route('admin.kategori');
     }
 
     /**
