@@ -31,7 +31,7 @@ const AdminLayout = ({ auth, children }) => {
                             Kategori
                         </li>
                     </Link>
-                    <Link href="#">
+                    <Link href="/admin/tag">
                         <li className="my-2 rounded-md hover:bg-orange-logo hover:shadow-xl hover:text-white px-3 py-2">
                             Tag
                         </li>

@@ -7,7 +7,12 @@ import AdminLayout from "@/Layouts/AdminLayout";
 const Kategori = (props) => {
     const Categories = props.kategori;
     const { kategori } = usePage().props;
-    // console.log(kategori);
+    console.log(kategori);
+
+    const deletePost = async (id) => {
+        Inertia.delete(`/admin/kategori/${id}`);
+    };
+
     return (
         <>
             <Head>
@@ -56,6 +61,16 @@ const Kategori = (props) => {
                                                   >
                                                       Detail
                                                   </Link>
+                                                  <button
+                                                      onClick={() =>
+                                                          deletePost(
+                                                              category.id
+                                                          )
+                                                      }
+                                                      className="text-sm py-1 px-2 rounded-lg bg-red-700 text-white mr-2"
+                                                  >
+                                                      DELETE
+                                                  </button>
                                               </td>
                                           </tr>
                                       );

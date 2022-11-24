@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('ukuran');
             $table->string('halaman');
             $table->string('keterangan');
-            $table->text('sinopsis');
+            $table->longText('sinopsis');
             $table->string('kategori')->nullable();
             $table->string('tag')->nullable();
             $table->timestamps();

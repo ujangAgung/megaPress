@@ -3,9 +3,11 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CategoriesController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\TagsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,12 +52,17 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/admin/tambah-buku', [BooksController::class, 'create']);
 
     // kategori Admin
-    Route::get('/admin/kategori', [CategoriesController::class, 'index'])->name('admin.kategori');
-    Route::post('/admin/kategori', [CategoriesController::class, 'store'])->name('admin.kategori.store');
-    Route::get('/admin/tambah-kategori', [CategoriesController::class, 'create']);
-    Route::get('/admin/kategori/{slug}/edit', [CategoriesController::class, 'edit'])->name('admin.kategori.edit');
+    Route::get('admin/kategori', [CategoriesController::class, 'index'])->name('admin.kategori');
+    Route::post('admin/kategori', [CategoriesController::class, 'store'])->name('admin.kategori.store');
+    Route::get('admin/tambah-kategori', [CategoriesController::class, 'create'])->name('admin.kategori.tambah');
+    Route::get('admin/kategori/{slug}/edit', [CategoriesController::class, 'edit'])->name('admin.kategori.edit');
     Route::put('admin/kategori/{slug}', [CategoriesController::class, 'update'])->name('admin.kategori.update');
-    Route::delete('/admin/kategori/{kategori}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
+    Route::delete('admin/kategori/{id}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
+
+    // tag Admin
+    Route::get('admin/tag', [TagsController::class, 'index'])->name('admin.tag');
+
+
     // Route::resource('/admin/', PostController::class);
 });
 

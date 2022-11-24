@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoriesRequest;
+use App\Http\Requests\UpdateCategoriesRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -76,11 +77,18 @@ class CategoriesController extends Controller
     {
         // $acakan = new Categories();
         // dd($acakan);
-        $data =  Categories::where('slug', $slug)->first();
-        return Inertia::render('Admin/editKategori', [
-            'title' => 'Edit Kategori',
-            'data' => $data
-        ]);
+        // $datas =  Categories::where('slug', $slug)->first();
+        // return Inertia::render('Admin/editKategori', [
+        //     'title' => 'Edit Kategori',
+        //     'datas' => $datas
+        // ]);
+        $kategori = [
+            'title' => "Edit Kategori",
+            'categories' => Categories::where('slug', $slug)->first(),
+            'auth' => auth()->user(),
+        ];
+
+        return Inertia::render('Admin/editKategori', ['kategori' => $kategori]);
     }
 
     /**
@@ -90,14 +98,25 @@ class CategoriesController extends Controller
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categories $categories)
+    public function update(UpdateCategoriesRequest $request, Categories $categories)
     {
-        Categories::where('id' , $request->id)->update([
-            'deskripsi' => $request->deskripsi,
-            'slug' => Str::slug($request->deskripsi, '-')
-        ]);
+        // $request->validate([
+        //     'deskripsi' => 'required'
+        // ]);
 
-        return Redirect::route('admin.kategori');
+        // Categories::where('id' , $request->id)->update([
+        //     'deskripsi' => $request->deskripsi,
+        //     'slug' => Str::slug($request->deskripsi, '-')
+        // ]);
+
+        // return Redirect::route('admin.kategori');
+        dd($request);
+        // $categories->update(
+        //     'slug' =>
+        //     $request->validated()
+        // );
+
+        return Redirect::route('admin.kategori')->with('success', 'Organization updated.');
     }
 
     /**
@@ -108,10 +127,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Categories $categories)
     {
-        // dd($categories);
         $categories->delete();
-        return Redirect::back()->with('message', 'Kategori Dihapus.');
-        // $categories->delete();
-        // return Redirect::route('admin.kategori');
+        return Redirect::route('admin.kategori')->with('message', 'Kategori Dihapus.');
     }
 }

@@ -14,8 +14,6 @@ const TambahKategori = (props) => {
         post(route("admin.kategori.store"));
     };
 
-    console.log("props last:", props);
-
     return (
         <>
             <Head>
