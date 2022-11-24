@@ -57,12 +57,16 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('admin/tambah-kategori', [CategoriesController::class, 'create'])->name('admin.kategori.tambah');
     Route::get('admin/kategori/{slug}/edit', [CategoriesController::class, 'edit'])->name('admin.kategori.edit');
     Route::put('admin/kategori/{slug}', [CategoriesController::class, 'update'])->name('admin.kategori.update');
+<<<<<<< HEAD
     Route::delete('admin/kategori/{id}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
 
     // tag Admin
     Route::get('admin/tag', [TagsController::class, 'index'])->name('admin.tag');
 
 
+=======
+    Route::delete('/admin/kategori/{id}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
+>>>>>>> 83d20da806e0a0d901b9f4c55f5b69a193a60cb6
     // Route::resource('/admin/', PostController::class);
 });
 
