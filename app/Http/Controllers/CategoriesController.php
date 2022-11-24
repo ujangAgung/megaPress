@@ -74,13 +74,20 @@ class CategoriesController extends Controller
      */
     public function edit(Categories $categories, $slug)
     {
-        // $acakan = new Categories();
-        // dd($acakan);
         $data =  Categories::where('slug', $slug)->first();
+        // return Inertia::render('Admin/editKategori', [
+        //     'title' => 'Edit Kategori',
+        //     'data' => $data
+        // ]);
+
         return Inertia::render('Admin/editKategori', [
-            'title' => 'Edit Kategori',
-            'data' => $data
+            'category' => [
+                'title' => 'Sunting Kategori',
+                'auth' => auth()->user(),
+                'data' => $data
+            ]
         ]);
+
     }
 
     /**
@@ -90,12 +97,21 @@ class CategoriesController extends Controller
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categories $categories)
+    public function update(StoreCategoriesRequest $request, Categories $categories)
     {
+        // dd($categories);
         Categories::where('id' , $request->id)->update([
             'deskripsi' => $request->deskripsi,
             'slug' => Str::slug($request->deskripsi, '-')
         ]);
+
+        // dd($request->slug = Str::slug($request->deskripsi, '-'));
+        // dd($request->id);
+        // $categories->update([
+        //     $request->slug = Str::slug($request->deskripsi, '-'),
+        //     $request->validated()
+        // ]
+        // );
 
         return Redirect::route('admin.kategori');
     }
@@ -106,12 +122,10 @@ class CategoriesController extends Controller
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categories $categories)
+    public function destroy(Request $request)
     {
-        // dd($categories);
-        $categories->delete();
-        return Redirect::back()->with('message', 'Kategori Dihapus.');
-        // $categories->delete();
-        // return Redirect::route('admin.kategori');
+        $kategori = Categories::find($request->id);
+        $kategori->delete();
+        return Redirect::route('admin.kategori')->with('message', 'Kategori Dihapus.');
     }
 }
