@@ -55,7 +55,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/admin/tambah-kategori', [CategoriesController::class, 'create']);
     Route::get('/admin/kategori/{slug}/edit', [CategoriesController::class, 'edit'])->name('admin.kategori.edit');
     Route::put('admin/kategori/{slug}', [CategoriesController::class, 'update'])->name('admin.kategori.update');
-    Route::delete('/admin/kategori/{kategori}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
+    Route::delete('/admin/kategori/{id}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
     // Route::resource('/admin/', PostController::class);
 });
 
