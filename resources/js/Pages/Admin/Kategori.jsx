@@ -6,16 +6,6 @@ import AdminLayout from "@/Layouts/AdminLayout";
 
 const Kategori = (props) => {
     const Categories = props.kategori;
-<<<<<<< HEAD
-    const { kategori } = usePage().props;
-    console.log(kategori);
-
-    const deletePost = async (id) => {
-        Inertia.delete(`/admin/kategori/${id}`);
-    };
-
-=======
->>>>>>> 83d20da806e0a0d901b9f4c55f5b69a193a60cb6
     return (
         <>
             <Head>
@@ -49,36 +39,6 @@ const Kategori = (props) => {
                                           <div className="m-auto text-center">
                                               <h3 className="text-xl font-bold mb-2">
                                                   {category.deskripsi}
-<<<<<<< HEAD
-                                              </td>
-                                              <td className="py-1">
-                                                  <Link
-                                                      href={route(
-                                                          "admin.kategori.edit",
-                                                          category.slug
-                                                      )}
-                                                      className="text-sm py-1 px-2 rounded-lg bg-blue-700 text-white mr-2"
-                                                  >
-                                                      Detail
-                                                  </Link>
-                                                  <button
-                                                      onClick={() =>
-                                                          deletePost(
-                                                              category.id
-                                                          )
-                                                      }
-                                                      className="text-sm py-1 px-2 rounded-lg bg-red-700 text-white mr-2"
-                                                  >
-                                                      DELETE
-                                                  </button>
-                                              </td>
-                                          </tr>
-                                      );
-                                  })
-                                : "Belum ada Kategori"}
-                        </tbody>
-                    </table>
-=======
                                               </h3>
                                           </div>
                                       </Link>
@@ -86,7 +46,6 @@ const Kategori = (props) => {
                               })
                             : ""}
                     </div>
->>>>>>> 83d20da806e0a0d901b9f4c55f5b69a193a60cb6
                 </div>
             </AdminLayout>
         </>

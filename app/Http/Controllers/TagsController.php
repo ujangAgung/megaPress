@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Tags;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class TagsController extends Controller
@@ -15,13 +17,11 @@ class TagsController extends Controller
      */
     public function index()
     {
-        $data = [
-            'title' => "Tag List",
-            'tags' => Tags::latest()->get(),
+        return Inertia::render('Admin/Tags', [
+            'title' => 'Tag',
             'auth' => auth()->user(),
-        ];
-
-        return Inertia::render('Admin/Tags', ['data' => $data]);
+            'tag' => Tags::all()
+        ]);
     }
 
     /**
@@ -31,7 +31,10 @@ class TagsController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/TambahTags', [
+            'title' => 'Tambah Tag',
+            'auth' => auth()->user(),
+        ]);
     }
 
     /**
@@ -42,7 +45,12 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categories = new Tags();
+        $categories->deskripsi = $request->deskripsi;
+        $categories->slug = Str::slug($request->deskripsi, '-');
+        $categories->save();
+
+        return Redirect::route('admin.tag');
     }
 
     /**
@@ -62,9 +70,16 @@ class TagsController extends Controller
      * @param  \App\Models\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tags $tags)
+    public function edit(Tags $tags, $slug)
     {
-        //
+        $data =  Tags::where('slug', $slug)->first();
+        return Inertia::render('Admin/EditTags', [
+            'tag' => [
+                'title' => 'Sunting Tag',
+                'auth' => auth()->user(),
+                'data' => $data
+            ]
+        ]);
     }
 
     /**
@@ -76,7 +91,11 @@ class TagsController extends Controller
      */
     public function update(Request $request, Tags $tags)
     {
-        //
+        Tags::where('id' , $request->id)->update([
+            'deskripsi' => $request->deskripsi,
+            'slug' => Str::slug($request->deskripsi, '-')
+        ]);
+        return Redirect::route('admin.tag');
     }
 
     /**
@@ -85,8 +104,10 @@ class TagsController extends Controller
      * @param  \App\Models\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tags $tags)
+    public function destroy(Request $request)
     {
-        //
+        $kategori = Tags::find($request->id);
+        $kategori->delete();
+        return Redirect::route('admin.tag')->with('message', 'Kategori Dihapus.');
     }
 }

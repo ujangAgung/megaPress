@@ -53,20 +53,22 @@ Route::middleware(['auth', 'verified'])->group(function() {
 
     // kategori Admin
     Route::get('admin/kategori', [CategoriesController::class, 'index'])->name('admin.kategori');
-    Route::post('admin/kategori', [CategoriesController::class, 'store'])->name('admin.kategori.store');
     Route::get('admin/tambah-kategori', [CategoriesController::class, 'create'])->name('admin.kategori.tambah');
+    Route::post('admin/kategori', [CategoriesController::class, 'store'])->name('admin.kategori.store');
     Route::get('admin/kategori/{slug}/edit', [CategoriesController::class, 'edit'])->name('admin.kategori.edit');
     Route::put('admin/kategori/{slug}', [CategoriesController::class, 'update'])->name('admin.kategori.update');
-<<<<<<< HEAD
     Route::delete('admin/kategori/{id}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
+
 
     // tag Admin
     Route::get('admin/tag', [TagsController::class, 'index'])->name('admin.tag');
+    Route::get('admin/tambah-tag', [TagsController::class, 'create'])->name('admin.tag.tambah');
+    Route::post('admin/tag', [TagsController::class, 'store'])->name('admin.tag.store');
+    Route::get('admin/tag/{slug}/edit', [TagsController::class, 'edit'])->name('admin.tag.edit');
+    Route::put('admin/tag/{slug}', [TagsController::class, 'update'])->name('admin.tag.update');
+    Route::delete('admin/kategori/{id}', [TagsController::class, 'destroy'])->name('admin.tag.destroy');
 
 
-=======
-    Route::delete('/admin/kategori/{id}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
->>>>>>> 83d20da806e0a0d901b9f4c55f5b69a193a60cb6
     // Route::resource('/admin/', PostController::class);
 });
 
