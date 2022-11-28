@@ -20,11 +20,8 @@ use App\Http\Controllers\TagsController;
 |
 */
 
-Route::get('/', [BooksController::class, 'index']);
-Route::get('/katalog', [BooksController::class, 'katalog']);
 
-Route::get('/kontak', function ()
-{
+Route::get('/kontak', function () {
     return Inertia::render('User/Kontak', [
         'title' => 'Kontak'
     ]);
@@ -43,13 +40,20 @@ Route::get('/acakan', function () {
     ]);
 });
 
-Route::middleware(['auth', 'verified'])->group(function() {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-    
-    Route::get('/admin', [BooksController::class, 'indexAdmin']);
-    Route::get('/admin/tambah-buku', [BooksController::class, 'create']);
+// User
+Route::get('/', [BooksController::class, 'index'])->name('user.buku.terakhir');
+Route::get('/katalog', [BooksController::class, 'katalog'])->name('user.katalog');
+
+// Admin
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Route::get('/dashboard', function () {
+    //     return Inertia::render('Dashboard');
+    // })->name('dashboard');
+
+    Route::get('admin', [BooksController::class, 'indexAdmin'])->name('admin.buku');
+    Route::get('admin/tambah-buku', [BooksController::class, 'create'])->name('admin.buku.tambah');
+    Route::post('admin/buku', [BooksController::class, 'store'])->name('admin.buku.store');
+
 
     // kategori Admin
     Route::get('admin/kategori', [CategoriesController::class, 'index'])->name('admin.kategori');
@@ -73,4 +77,4 @@ Route::middleware(['auth', 'verified'])->group(function() {
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

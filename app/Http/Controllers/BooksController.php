@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Books;
 use App\Models\Categories;
+use App\Models\Tags;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
@@ -54,6 +57,8 @@ class BooksController extends Controller
         return Inertia::render('Admin/TambahBuku', [
             'title' => 'Tambah Buku',
             'auth' => auth()->user(),
+            'categories' => Categories::all(),
+            'tags' => Tags::all()
         ]);
     }
 
@@ -65,7 +70,14 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        dd($request->gambar);
+
+        $books = new Books();
+        $books->deskripsi = $request->deskripsi;
+        $books->slug = Str::slug($request->deskripsi, '-');
+        $books->save();
+
+        return Redirect::route('admin.kategori');
     }
 
     /**

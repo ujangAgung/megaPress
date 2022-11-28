@@ -22,7 +22,35 @@ const Index = (props) => {
                     >
                         Tambah Buku
                     </Link>
-                    <table className="w-full table-auto mt-5">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mt-8">
+                        {Books.length > 0 ? Books.map((book) => {
+                            return(
+                                <Link href="#" key={book.id}>
+                                    <div className="text-center hover:shadow-2xl rounded-lg border" key={book.id}>
+                                        <img 
+                                        className="bg-black rounded-t-lg"
+                                        src="/img/buku1.png"
+                                        alt={book.slug}/>
+                                        <div className="p-2">
+                                        <h3 className="text-xl font-semibold">{ book.judul }</h3>
+                                        <h1 className="text-2xl my-2 text-orange-logo">{ book.harga }</h1>
+                                        <div className="flex justify-between">
+                                            <p className="text-sm px-2 rounded-full border border-green-500">{ book.penulis }</p>
+                                            <p className="text-sm px-2 rounded-full border border-blue-700">{ book.kategori }</p>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            )
+                        }) : 
+                        <div className="flex">
+                            <div className="m-auto">
+                                <h1 >Buku Belum Tersedia!</h1>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    {/* <table className="w-full table-auto mt-5">
                         <thead>
                             <tr>
                                 <th className="p-2">No.</th>
@@ -66,7 +94,7 @@ const Index = (props) => {
                                   })
                                 : "Tidak ada buku"}
                         </tbody>
-                    </table>
+                    </table> */}
                 </div>
             </AdminLayout>
         </>

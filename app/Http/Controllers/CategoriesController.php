@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoriesRequest;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -93,7 +93,7 @@ class CategoriesController extends Controller
      */
     public function update(StoreCategoriesRequest $request, Categories $categories)
     {
-        Categories::where('id' , $request->id)->update([
+        Categories::where('id', $request->id)->update([
             'deskripsi' => $request->deskripsi,
             'slug' => Str::slug($request->deskripsi, '-')
         ]);

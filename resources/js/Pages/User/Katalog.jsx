@@ -6,8 +6,10 @@ import Navbar from "@/Components/layouts/Navbar";
 import Footer from "@/Components/layouts/Footer";
 
 const Katalog = (props) => {
-    // console.log(props.books);
+    // console.log(props.kategori);
     const books = props.books;
+    const categories = props.categories;
+
     return (
         <>
             <Head>
@@ -27,13 +29,29 @@ const Katalog = (props) => {
                     <h5 className="font-semibold text-2xl uppercase mb-10">
                         {props.title}
                     </h5>
+                    <div className="flex">
+                        <div className="w-3/12 p-5 bg-yellow-300">
+                            <h3 className="font-bold text-xl text-start mb-5">Filter</h3>
+                            <ul className="uppercase font-semibold">
+                                {categories.length > 0 ? (
+                                    categories.map((category) => {
+                                        return(
+                                            <Link href="#" key={category.id} className="hover:underline">
+                                            <li>{category.deskripsi}</li>
+                                            </Link>
+                                        )
+                                    })
+                                ) : ""}
+                            </ul>
+                        </div>
+                        <div className="w-9/12 bg-violet-500"> 
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3">
                         {books.length > 0 ? (
-                            books.map((book, i) => {
+                            books.map((book) => {
                                 return (
                                     <Link
                                         href="#"
-                                        key={i}
+                                        key={book.id}
                                         className="rounded-lg hover:shadow-xl"
                                     >
                                         <div className="p-2">
@@ -56,6 +74,8 @@ const Katalog = (props) => {
                                 <p>Buku Belum Tersedia</p>
                             </div>
                         )}
+                    </div>
+                        </div>
                     </div>
                 </div>
             </section>
