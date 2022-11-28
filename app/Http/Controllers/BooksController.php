@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Books;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -38,8 +39,8 @@ class BooksController extends Controller
         return Inertia::render('User/Katalog', [
             'title' => 'Katalog',
             'description' => 'Katalog Buku',
-            // 'auth' => auth()->user(),
-            'books' => Books::all()
+            'books' => Books::all(),
+            'categories' => Categories::all()
         ]);
     }
 
