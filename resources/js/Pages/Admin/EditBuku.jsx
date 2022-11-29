@@ -1,45 +1,54 @@
-import React, { useState } from "react";
-import { Head, useForm } from "@inertiajs/inertia-react";
+import React from "react";
+import { Head, useForm, usePage } from "@inertiajs/inertia-react";
 
 import AdminLayout from "@/Layouts/AdminLayout";
 
-const TambahBuku = (props) => {
-    const categories = props.categories;
-    const tags = props.tags;
-    const { data, setData, errors, post } = useForm({
-        judul: "",
-        gambar: null,
-        harga: 0,
-        penulis: "",
-        cetakan: "",
-        isbn: "Belum ada ISBN",
-        ukuran: "",
-        halaman: "",
-        keterangan: "",
-        sinopsis: "",
-        kategori: "",
-        tag: "",
+const EditBuku = () => {
+    const { datas } = usePage().props;
+    const book = datas.book;
+    const categories = datas.categories;
+    const tags = datas.tags;
+    const { data, setData, errors, put } = useForm({
+        id: book.id,
+        judul: book.judul || "",
+        gambar: book.gambar || "",
+        harga: book.harga || 0,
+        penulis: book.penulis || "",
+        cetakan: book.cetakan || "",
+        isbn: book.isbn || "",
+        ukuran: book.ukuran || "",
+        halaman: book.halaman || "",
+        keterangan: book.keterangan || "",
+        sinopsis: book.sinopsis || "",
+        kategori: book.kategori || "",
+        tag: book.tag || "",
     });
 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     post(route("admin.buku.store"), { forceFormData: true });
+    // };
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route("admin.buku.store"), { forceFormData: true });
+        put(route("admin.buku.update", datas.book.slug), {
+            forceFormData: true,
+        });
     };
 
     return (
         <>
             <Head>
-                <title>{props.title}</title>
+                <title>{datas.title}</title>
             </Head>
-            <AdminLayout auth={props.auth}>
+            <AdminLayout auth={datas.auth}>
                 <div className="px-5 mb-10">
                     <form
-                        name="createForm"
+                        // name="createForm"
                         onSubmit={handleSubmit}
                         encType="multipart/form-data"
                     >
                         <div className="container mx-auto mt-10">
-                            <h1 className="text-4xl">{props.title}</h1>
+                            <h1 className="text-4xl">{datas.title}</h1>
                             <div className="relative z-0 my-6 w-full group">
                                 <input
                                     type="text"
@@ -149,10 +158,6 @@ const TambahBuku = (props) => {
                                     >
                                         ISBN
                                     </label>
-                                    <span className="text-xs italic text-gray-500">
-                                        *jika telah memiliki isbn maka masukan
-                                        disini
-                                    </span>
                                 </div>
                             </div>
                             <div className="grid md:grid-cols-2 md:gap-6">
@@ -294,7 +299,7 @@ const TambahBuku = (props) => {
                                     id="gambar"
                                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                     placeholder=""
-                                    required
+                                    // required
                                     // value={data.gambar}
                                     onChange={(e) =>
                                         setData("gambar", e.target.files[0])
@@ -330,7 +335,7 @@ const TambahBuku = (props) => {
                                 type="submit"
                                 className="text-white bg-orange-logo hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                             >
-                                Submit
+                                Update
                             </button>
                         </div>
                     </form>
@@ -340,4 +345,4 @@ const TambahBuku = (props) => {
     );
 };
 
-export default TambahBuku;
+export default EditBuku;

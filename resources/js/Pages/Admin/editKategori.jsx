@@ -18,7 +18,7 @@ const editKategori = () => {
     };
 
     const destroy = () => {
-        if (confirm("Are you sure you want to delete this organization?")) {
+        if (confirm("Yakin ingin menghapus kategori ini?")) {
             Inertia.delete(route("admin.kategori.destroy", data.id));
         }
     };

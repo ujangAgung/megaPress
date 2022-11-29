@@ -22,25 +22,26 @@ const Index = (props) => {
                     >
                         Tambah Buku
                     </Link>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mt-8">
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 mt-8">
                         {Books.length > 0 ? Books.map((book) => {
+                            let judul = book.judul
+                            const regex = /^\d{10}$/
+                            const resultJudul = judul.match(regex)
+                            console.log(resultJudul);
                             return(
                                 <Link href={route(
                                     "admin.buku.show",
                                     book.slug
-                                )} key={book.id}>
-                                    <div className="text-center hover:shadow-2xl rounded-lg border" key={book.id}>
+                                )} key={book.id}
+                                className="text-center hover:shadow-2xl rounded-lg border">
+                                    <div>
                                         <img 
                                         className="bg-black rounded-t-lg"
-                                        src="/img/buku1.png"
+                                        src={`/img/book/${book.gambar}`}
                                         alt={book.slug}/>
                                         <div className="p-2">
-                                        <h3 className="text-xl font-semibold">{ book.judul }</h3>
-                                        <h1 className="text-2xl my-2 text-orange-logo">{ book.harga }</h1>
-                                        <div className="flex justify-between">
-                                            <p className="text-sm px-2 rounded-full border border-green-500">{ book.penulis }</p>
-                                            <p className="text-sm px-2 rounded-full border border-blue-700">{ book.kategori }</p>
-                                        </div>
+                                        <h3 className="text-sm font-semibold uppercase">{ resultJudul }</h3>
+                                        <h1 className="text-lg my-2 text-orange-logo">{ book.harga }</h1>
                                         </div>
                                     </div>
                                 </Link>

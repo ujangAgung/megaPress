@@ -6,7 +6,6 @@ import AdminLayout from "@/Layouts/AdminLayout";
 
 const Tags = (props) => {
     const Tags = props.tag;
-    console.log(Tags);
     return (
         <>
             <Head>

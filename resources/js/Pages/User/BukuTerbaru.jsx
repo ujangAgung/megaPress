@@ -20,15 +20,15 @@ const BukuTerbaru = (props) => {
                                 }
                                 key={book.id}
                             >
-                                <div className="w-full md:w-1/2 flex">
+                                <div className="w-full md:w-1/3 flex">
                                     <div className="m-auto">
                                         <img
-                                            src="/img/buku1.png"
-                                            alt="Buku Pertama"
+                                            src={`/img/book/${book.gambar}`}
+                                            alt={book.slug}
                                         />
                                     </div>
                                 </div>
-                                <div className="p-6 md:w-1/2 flex">
+                                <div className="p-6 md:w-2/3 flex">
                                     <div className="m-auto text-center">
                                         <h4 className="text-3xl font-bold mb-10">
                                             {book.judul}

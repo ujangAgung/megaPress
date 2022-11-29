@@ -106,8 +106,8 @@ class TagsController extends Controller
      */
     public function destroy(Request $request)
     {
-        $kategori = Tags::find($request->id);
-        $kategori->delete();
-        return Redirect::route('admin.tag')->with('message', 'Kategori Dihapus.');
+        $tag = Tags::find($request->id);
+        $tag->delete();
+        return Redirect::route('admin.tag')->with('message', 'Tag Dihapus.');
     }
 }

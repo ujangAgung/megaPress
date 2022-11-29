@@ -122,9 +122,21 @@ class BooksController extends Controller
      * @param  \App\Models\Books  $books
      * @return \Illuminate\Http\Response
      */
-    public function edit(Books $books)
+    public function edit(Books $books, $slug)
     {
-        //
+        $book = Books::where('slug', $slug)->first();
+        $categories = Categories::all();
+        $tags = Tags::all();
+
+        return Inertia::render('Admin/EditBuku', [
+            'datas' => [
+                'title' => 'Edit Buku',
+                'auth' => auth()->user(),
+                'book' => $book,
+                'categories' => $categories,
+                'tags' => $tags 
+            ]
+        ]);
     }
 
     /**
@@ -136,7 +148,73 @@ class BooksController extends Controller
      */
     public function update(Request $request, Books $books)
     {
-        //
+        dd($request);
+        $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
+
+        $oldPict = Books::find($request->id);
+        // dd($oldPict->gambar);
+
+        if ($request->gambar != ''){
+            $request->validate([
+                'judul' => 'required',
+
+            ]);
+            $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
+        }
+
+        Books::where('id', $request->id)->update([
+            'judul'      => $request->judul,
+            'gambar'     => $imgName,
+            'slug'       => Str::slug($request->judul, '-'),
+            'harga'      => $request->harga,
+            'penulis'    => $request->penulis,
+            'cetakan'    => $request->cetakan,
+            'isbn'       => $request->isbn,
+            'ukuran'     => $request->ukuran,
+            'halaman'    => $request->halaman,
+            'keterangan' => $request->keterangan,
+            'sinopsis'   => $request->sinopsis,
+            'kategori'   => $request->kategori,
+            'tag'        => $request->tag
+        ]);
+        // $oldData = Barang::find($id);
+        // dd($request);
+        // memberi nama supaya file tidak sama
+        // if ($request->gambar != ''){
+        //     $request->validate([
+        //         'nama_barang' => 'required',
+        //         'harga' => 'required',
+        //         'jumlah' => 'required',
+        //         'gambar' => 'required|mimes:png,jpeg,jpg'
+        //     ]);
+
+        //     $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
+
+            // memindahkan file ke dirctory public
+            // $request->gambar->move(public_path('img'), $imgName);
+
+        // } elseif ($request->nama_barang != $oldData->nama_barang) {
+        //     $request->validate([
+        //         'nama_barang' => 'required|unique:Barang,nama_barang',
+        //         'harga' => 'required',
+        //         'jumlah' => 'required',
+        //     ]);
+        //     if ($request->gambar != ''){
+        //         $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
+
+            // memindahkan file ke dirctory public
+    //         $request->gambar->move(public_path('img'), $imgName);
+    //         }else {
+    //             $imgName = $oldData->gambar;
+    //         }
+    //     } else {
+    //         $request->validate([
+    //             'nama_barang' => 'required',
+    //             'harga' => 'required',
+    //             'jumlah' => 'required',
+    //         ]);
+    //         $imgName = $oldData->gambar;
+    //     }
     }
 
     /**
@@ -145,8 +223,19 @@ class BooksController extends Controller
      * @param  \App\Models\Books  $books
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Books $books)
+    public function destroy(Books $books, $id)
     {
-        //
+        $del = Books::find($id);
+        $hps = $del->gambar;
+        $gmbrHps = public_path('img/book/' . $hps);
+        // dd($gmbrHps);
+        $tdkHpsDefault = public_path('img/book/default.png');
+        if (file_exists($gmbrHps)) {
+            if ($gmbrHps != $tdkHpsDefault) {
+                unlink($gmbrHps);
+            }
+        }
+        $del->delete();
+        return Redirect::route('admin.buku')->with('message', 'Kategori Dihapus.');
     }
 }

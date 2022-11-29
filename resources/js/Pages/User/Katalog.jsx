@@ -56,7 +56,7 @@ const Katalog = (props) => {
                                     >
                                         <div className="p-2">
                                             <img
-                                                src="/img/buku1.png"
+                                                src={`/img/book/${book.gambar}`}
                                                 alt={book.slug}
                                             />
                                             <h5 className="text-md font-semibold uppercase">

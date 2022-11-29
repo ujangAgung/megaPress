@@ -91,8 +91,9 @@ class CategoriesController extends Controller
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategoriesRequest $request, Categories $categories)
+    public function update(Request $request, Categories $categories)
     {
+        // dd($request);
         Categories::where('id', $request->id)->update([
             'deskripsi' => $request->deskripsi,
             'slug' => Str::slug($request->deskripsi, '-')
@@ -108,6 +109,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Request $request)
     {
+        dd($request);
         $kategori = Categories::find($request->id);
         $kategori->delete();
         return Redirect::route('admin.kategori')->with('message', 'Kategori Dihapus.');

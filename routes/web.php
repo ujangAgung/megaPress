@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\TagsController;
+use App\Models\Books;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin/tambah-buku', [BooksController::class, 'create'])->name('admin.buku.tambah');
     Route::post('admin/buku', [BooksController::class, 'store'])->name('admin.buku.store');
     Route::get('admin/buku/{slug}', [BooksController::class, 'show'])->name('admin.buku.show');
+    Route::get('admin/buku/{slug}/edit', [BooksController::class, 'edit'])->name('admin.buku.edit');
+    Route::put('admin/buku/{slug}', [BooksController::class, 'update'])->name('admin.buku.update');
+    Route::delete('admin/buku/{id}', [BooksController::class, 'destroy'])->name('admin.buku.destroy');
 
 
     // kategori Admin
