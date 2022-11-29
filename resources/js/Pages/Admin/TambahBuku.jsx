@@ -8,7 +8,7 @@ const TambahBuku = (props) => {
     const tags = props.tags
     const { data, setData, errors, post } = useForm({
         judul: "",
-        gambar: "",
+        gambar: null,
         harga: 0,
         penulis: "",
         cetakan: "",
@@ -23,7 +23,7 @@ const TambahBuku = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route("admin.buku.store"));
+        post(route("admin.buku.store"), {forceFormData: true});
     };
 
     return (
@@ -32,8 +32,8 @@ const TambahBuku = (props) => {
                 <title>{props.title}</title>
             </Head>
             <AdminLayout auth={props.auth}>
-                <div className="px-5">
-                    <form name="createForm" onSubmit={handleSubmit}>
+                <div className="px-5 mb-10">
+                    <form name="createForm" onSubmit={handleSubmit} encType="multipart/form-data">
                         <div className="container mx-auto mt-10">
                             <h1 className="text-4xl">{props.title}</h1>
                             <div className="relative z-0 my-6 w-full group">
@@ -225,8 +225,8 @@ const TambahBuku = (props) => {
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=""
                                 required
-                                value={data.gambar}
-                                onChange={(e) => setData("gambar", e.target.file)}
+                                // value={data.gambar}
+                                onChange={(e) => setData("gambar", e.target.files[0])}
                             />
                             <label
                                 htmlFor="gambar"

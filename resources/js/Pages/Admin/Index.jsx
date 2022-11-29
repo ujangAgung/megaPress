@@ -25,7 +25,10 @@ const Index = (props) => {
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mt-8">
                         {Books.length > 0 ? Books.map((book) => {
                             return(
-                                <Link href="#" key={book.id}>
+                                <Link href={route(
+                                    "admin.buku.show",
+                                    book.slug
+                                )} key={book.id}>
                                     <div className="text-center hover:shadow-2xl rounded-lg border" key={book.id}>
                                         <img 
                                         className="bg-black rounded-t-lg"

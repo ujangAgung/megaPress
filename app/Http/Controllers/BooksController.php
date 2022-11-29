@@ -70,14 +70,31 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->gambar);
+        // memberi nama supaya file tidak sama
+        $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
+        // dd($imgName);
+        
+        // memindahkan file ke dirctory public
+        $request->gambar->move(public_path('img/book'), $imgName);
 
-        $books = new Books();
-        $books->deskripsi = $request->deskripsi;
-        $books->slug = Str::slug($request->deskripsi, '-');
-        $books->save();
 
-        return Redirect::route('admin.kategori');
+        Books::create([
+            'judul'      => $request->judul,
+            'gambar'     => $imgName,
+            'slug'       => Str::slug($request->judul, '-'),
+            'harga'      => $request->harga,
+            'penulis'    => $request->penulis,
+            'cetakan'    => $request->cetakan,
+            'isbn'       => $request->isbn,
+            'ukuran'     => $request->ukuran,
+            'halaman'    => $request->halaman,
+            'keterangan' => $request->keterangan,
+            'sinopsis'   => $request->sinopsis,
+            'kategori'   => $request->kategori,
+            'tag'        => $request->tag
+        ]);
+
+        return Redirect::route('admin.buku');
     }
 
     /**
@@ -86,9 +103,17 @@ class BooksController extends Controller
      * @param  \App\Models\Books  $books
      * @return \Illuminate\Http\Response
      */
-    public function show(Books $books)
+    public function show(Books $books, $slug)
     {
-        //
+        // dd($slug);
+        $books = Books::where('slug', $slug)->first();
+        return Inertia::render('Admin/TampilBuku', [
+            'data' => [
+                'title' => 'Buku',
+                'auth' => auth()->user(),
+                'books' => $books
+            ]
+        ]);
     }
 
     /**

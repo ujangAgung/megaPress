@@ -53,6 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin', [BooksController::class, 'indexAdmin'])->name('admin.buku');
     Route::get('admin/tambah-buku', [BooksController::class, 'create'])->name('admin.buku.tambah');
     Route::post('admin/buku', [BooksController::class, 'store'])->name('admin.buku.store');
+    Route::get('admin/buku/{slug}', [BooksController::class, 'show'])->name('admin.buku.show');
 
 
     // kategori Admin
