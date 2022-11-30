@@ -4,6 +4,7 @@ import { Link, Head } from "@inertiajs/inertia-react";
 import AdminLayout from "@/Layouts/AdminLayout";
 
 const Index = (props) => {
+    console.log(props.books);
     const Books = props.books;
     return (
         <>
@@ -23,82 +24,54 @@ const Index = (props) => {
                         Tambah Buku
                     </Link>
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 mt-8">
-                        {Books.length > 0 ? Books.map((book) => {
-                            let judul = book.judul
-                            const regex = /^\d{10}$/
-                            const resultJudul = judul.match(regex)
-                            console.log(resultJudul);
-                            return(
-                                <Link href={route(
-                                    "admin.buku.show",
-                                    book.slug
-                                )} key={book.id}
-                                className="text-center hover:shadow-2xl rounded-lg border">
-                                    <div>
-                                        <img 
-                                        className="bg-black rounded-t-lg"
-                                        src={`/img/book/${book.gambar}`}
-                                        alt={book.slug}/>
-                                        <div className="p-2">
-                                        <h3 className="text-sm font-semibold uppercase">{ resultJudul }</h3>
-                                        <h1 className="text-lg my-2 text-orange-logo">{ book.harga }</h1>
+                        {Books.length > 0 ? (
+                            Books.map((book) => {
+                                const judul = book.judul;
+                                const res =
+                                    judul.length > 20
+                                        ? `${judul.substring(0, 20)}...`
+                                        : judul;
+                                const nominal = book.harga;
+                                const harga = new Intl.NumberFormat("id-ID", {
+                                    style: "currency",
+                                    currency: "IDR",
+                                }).format(nominal);
+
+                                return (
+                                    <Link
+                                        href={route(
+                                            "admin.buku.show",
+                                            book.slug
+                                        )}
+                                        key={book.id}
+                                        className="text-center hover:shadow-2xl rounded-lg border"
+                                    >
+                                        <div>
+                                            <img
+                                                className="bg-black rounded-t-lg"
+                                                src={`/img/book/${book.gambar}`}
+                                                alt={book.slug}
+                                            />
+                                            <div className="p-2">
+                                                <h3 className="text-sm font-semibold">
+                                                    {res}
+                                                </h3>
+                                                <h1 className="text-lg my-2 text-orange-logo">
+                                                    {harga}
+                                                </h1>
+                                            </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            )
-                        }) : 
-                        <div className="flex">
-                            <div className="m-auto">
-                                <h1 >Buku Belum Tersedia!</h1>
+                                    </Link>
+                                );
+                            })
+                        ) : (
+                            <div className="flex">
+                                <div className="m-auto">
+                                    <h1>Buku Belum Tersedia!</h1>
+                                </div>
                             </div>
-                        </div>
-                        }
+                        )}
                     </div>
-                    {/* <table className="w-full table-auto mt-5">
-                        <thead>
-                            <tr>
-                                <th className="p-2">No.</th>
-                                <th className="p-2">Gambar</th>
-                                <th className="p-2">Judul</th>
-                                <th className="p-2">Detail</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-center space-y-6">
-                            {Books
-                                ? Books.map((book, i) => {
-                                      i++;
-                                      return (
-                                          <tr
-                                              key={book.id}
-                                              className="hover:bg-white hover:cursor-pointer"
-                                          >
-                                              <th className="py-1">{i}</th>
-                                              <td className="py-1">
-                                                  {book.gambar}
-                                              </td>
-                                              <td className="py-1">
-                                                  {book.judul}
-                                              </td>
-                                              <td className="py-1">
-                                                  <Link
-                                                      href="#"
-                                                      className="text-sm py-1 px-2 rounded-lg bg-blue-700 text-white mr-2"
-                                                  >
-                                                      Edit
-                                                  </Link>
-                                                  <Link
-                                                      href="#"
-                                                      className="text-sm py-1 px-2 rounded-lg bg-red-700 text-white"
-                                                  >
-                                                      Delete
-                                                  </Link>
-                                              </td>
-                                          </tr>
-                                      );
-                                  })
-                                : "Tidak ada buku"}
-                        </tbody>
-                    </table> */}
                 </div>
             </AdminLayout>
         </>

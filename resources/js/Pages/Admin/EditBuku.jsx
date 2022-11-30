@@ -8,7 +8,7 @@ const EditBuku = () => {
     const book = datas.book;
     const categories = datas.categories;
     const tags = datas.tags;
-    const { data, setData, errors, put } = useForm({
+    const { data, setData, errors, post } = useForm({
         id: book.id,
         judul: book.judul || "",
         gambar: book.gambar || "",
@@ -22,17 +22,14 @@ const EditBuku = () => {
         sinopsis: book.sinopsis || "",
         kategori: book.kategori || "",
         tag: book.tag || "",
+        _method: "PUT",
     });
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     post(route("admin.buku.store"), { forceFormData: true });
-    // };
+    console.log(errors);
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        put(route("admin.buku.update", datas.book.slug), {
-            forceFormData: true,
-        });
+        post(route("admin.buku.update", data.id), { forceFormData: true });
     };
 
     return (
@@ -43,7 +40,7 @@ const EditBuku = () => {
             <AdminLayout auth={datas.auth}>
                 <div className="px-5 mb-10">
                     <form
-                        // name="createForm"
+                        name="createForm"
                         onSubmit={handleSubmit}
                         encType="multipart/form-data"
                     >

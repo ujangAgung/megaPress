@@ -70,6 +70,7 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->gambar);
         // memberi nama supaya file tidak sama
         $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
         // dd($imgName);
@@ -116,6 +117,20 @@ class BooksController extends Controller
         ]);
     }
 
+    public function showUser(Books $books ,$slug)
+    {
+        // dd($slug);
+        $books = Books::where('slug', $slug)->first();
+        return inertia::render('User/TampilKatalog', [
+            'data' => [
+                'title' => 'Detail Buku',
+                'auth' => auth()->user(),
+                'categories' => Categories::all(),
+                'books' => $books
+            ]
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -148,18 +163,71 @@ class BooksController extends Controller
      */
     public function update(Request $request, Books $books)
     {
-        dd($request);
-        $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
-
         $oldPict = Books::find($request->id);
         // dd($oldPict->gambar);
 
-        if ($request->gambar != ''){
+        if ($request->gambar != $oldPict->gambar){
             $request->validate([
-                'judul' => 'required',
+                'judul'      => 'required',
+                'gambar'     => 'required|mimes:png,jpeg,jpg',
+                // 'slug'       => 'required',
+                'harga'      => 'required',
+                'penulis'    => 'required',
+                'cetakan'    => 'required',
+                'isbn'       => 'required',
+                'ukuran'     => 'required',
+                'halaman'    => 'required',
+                'keterangan' => 'required',
+                'sinopsis'   => 'required',
+                'kategori'   => 'required',
+                'tag'        => 'required',
 
             ]);
             $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
+
+            $request->gambar->move(public_path('img/book'), $imgName);
+
+        }elseif ($request->judul != $oldPict->judul) {
+            $request->validate([
+                'judul'      => 'required|unique:books,judul',
+                // 'gambar'     => 'required|mimes:png,jpeg,jpg',
+                // 'slug'       => 'required',
+                'harga'      => 'required',
+                'penulis'    => 'required',
+                'cetakan'    => 'required',
+                'isbn'       => 'required',
+                'ukuran'     => 'required',
+                'halaman'    => 'required',
+                'keterangan' => 'required',
+                'sinopsis'   => 'required',
+                'kategori'   => 'required',
+                'tag'        => 'required',
+            ]);
+            if ($request->gambar != $oldPict->gambar){
+                $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
+
+            // memindahkan file ke dirctory public
+            $request->gambar->move(public_path('img/book/'), $imgName);
+            }else {
+                $imgName = $oldPict->gambar;
+            }
+        } else {
+            $request->validate([
+                'judul'      => 'required',
+                // 'gambar'     => 'required|mimes:png,jpeg,jpg',
+                // 'slug'       => 'required',
+                'harga'      => 'required',
+                'penulis'    => 'required',
+                'cetakan'    => 'required',
+                'isbn'       => 'required',
+                'ukuran'     => 'required',
+                'halaman'    => 'required',
+                'keterangan' => 'required',
+                'sinopsis'   => 'required',
+                'kategori'   => 'required',
+                'tag'        => 'required',
+            ]);
+            $imgName = $oldPict->gambar;
         }
 
         Books::where('id', $request->id)->update([
@@ -177,44 +245,8 @@ class BooksController extends Controller
             'kategori'   => $request->kategori,
             'tag'        => $request->tag
         ]);
-        // $oldData = Barang::find($id);
-        // dd($request);
-        // memberi nama supaya file tidak sama
-        // if ($request->gambar != ''){
-        //     $request->validate([
-        //         'nama_barang' => 'required',
-        //         'harga' => 'required',
-        //         'jumlah' => 'required',
-        //         'gambar' => 'required|mimes:png,jpeg,jpg'
-        //     ]);
 
-        //     $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
-
-            // memindahkan file ke dirctory public
-            // $request->gambar->move(public_path('img'), $imgName);
-
-        // } elseif ($request->nama_barang != $oldData->nama_barang) {
-        //     $request->validate([
-        //         'nama_barang' => 'required|unique:Barang,nama_barang',
-        //         'harga' => 'required',
-        //         'jumlah' => 'required',
-        //     ]);
-        //     if ($request->gambar != ''){
-        //         $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
-
-            // memindahkan file ke dirctory public
-    //         $request->gambar->move(public_path('img'), $imgName);
-    //         }else {
-    //             $imgName = $oldData->gambar;
-    //         }
-    //     } else {
-    //         $request->validate([
-    //             'nama_barang' => 'required',
-    //             'harga' => 'required',
-    //             'jumlah' => 'required',
-    //         ]);
-    //         $imgName = $oldData->gambar;
-    //     }
+        return Redirect::route('admin.buku');
     }
 
     /**

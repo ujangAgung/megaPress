@@ -1,18 +1,11 @@
 import React from "react";
 import { Head, usePage, Link } from "@inertiajs/inertia-react";
-import { Inertia } from "@inertiajs/inertia";
 
-import AdminLayout from "@/Layouts/AdminLayout";
+import KatalogLayout from "@/Layouts/KatalogLayout";
 
-const TampilBuku = () => {
+const TampilKatalog = () => {
     const { data } = usePage().props;
     const books = data.books;
-
-    const destroy = () => {
-        if (confirm("Yakin ingin menghapus buku ini?")) {
-            Inertia.delete(route("admin.buku.destroy", books.id));
-        }
-    };
 
     const nominal = books.harga;
     const harga = new Intl.NumberFormat("id-ID", {
@@ -23,9 +16,9 @@ const TampilBuku = () => {
     return (
         <>
             <Head>
-                <title>{books.judul}</title>
+                <title>{data.title}</title>
             </Head>
-            <AdminLayout auth={data.auth}>
+            <KatalogLayout categories={data.categories} title={data.title}>
                 <div className="p-5">
                     <div className="flex">
                         <div className="w-1/2 flex">
@@ -36,7 +29,7 @@ const TampilBuku = () => {
                                 />
                             </div>
                         </div>
-                        <div className="w-1/2 px-3">
+                        <div className="w-1/2 px-3 text-left">
                             <h1 className="text-3xl font-bold mb-5">
                                 {books.judul}
                             </h1>
@@ -58,27 +51,17 @@ const TampilBuku = () => {
                                 <span className="font-bold">Kategori : </span>
                                 {books.kategori}
                             </p>
-                            <p>
+                            <p className="mb-5">
                                 <span className="font-bold">Tag : </span>
                                 {books.tag}
                             </p>
-                            <ul className="flex my-5">
-                                <Link
-                                    href={route("admin.buku.edit", books.slug)}
-                                    className="text-xl rounded-full uppercase py-1 font-bold px-4 mr-3 text-white bg-blue-600 hover:cursor-pointer hover:bg-blue-900"
-                                >
-                                    <li>Edit</li>
-                                </Link>
-                                <li className="">
-                                    <button
-                                        onClick={destroy}
-                                        type="button"
-                                        className="text-xl rounded-full uppercase py-1 font-bold px-4 mr-3 text-white bg-red-600 hover:cursor-pointer hover:bg-red-900"
-                                    >
-                                        hapus
-                                    </button>
-                                </li>
-                            </ul>
+                            <a
+                                href="#"
+                                className="text-xl rounded-full uppercase py-1 font-bold px-4 mr-3 text-white bg-green-800 hover:cursor-pointer hover:bg-green-800"
+                                target="_blank"
+                            >
+                                Beli
+                            </a>
                         </div>
                     </div>
                     <div className="text-justify">
@@ -86,9 +69,9 @@ const TampilBuku = () => {
                         <p>{books.sinopsis}</p>
                     </div>
                 </div>
-            </AdminLayout>
+            </KatalogLayout>
         </>
     );
 };
 
-export default TampilBuku;
+export default TampilKatalog;

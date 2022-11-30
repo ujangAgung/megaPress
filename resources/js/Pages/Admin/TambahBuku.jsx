@@ -12,7 +12,7 @@ const TambahBuku = (props) => {
         harga: 0,
         penulis: "",
         cetakan: "",
-        isbn: "Belum ada ISBN",
+        isbn: "ISBN belum terbit",
         ukuran: "",
         halaman: "",
         keterangan: "",

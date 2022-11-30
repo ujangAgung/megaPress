@@ -44,6 +44,7 @@ Route::get('/acakan', function () {
 // User
 Route::get('/', [BooksController::class, 'index'])->name('user.buku.terakhir');
 Route::get('/katalog', [BooksController::class, 'katalog'])->name('user.katalog');
+Route::get('katalog/{slug}', [BooksController::class, 'showUser'])->name('user.katalog.show');
 
 // Admin
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -56,7 +57,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('admin/buku', [BooksController::class, 'store'])->name('admin.buku.store');
     Route::get('admin/buku/{slug}', [BooksController::class, 'show'])->name('admin.buku.show');
     Route::get('admin/buku/{slug}/edit', [BooksController::class, 'edit'])->name('admin.buku.edit');
-    Route::put('admin/buku/{slug}', [BooksController::class, 'update'])->name('admin.buku.update');
+    Route::put('admin/buku/{id}', [BooksController::class, 'update'])->name('admin.buku.update');
     Route::delete('admin/buku/{id}', [BooksController::class, 'destroy'])->name('admin.buku.destroy');
 
 
@@ -65,7 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin/tambah-kategori', [CategoriesController::class, 'create'])->name('admin.kategori.tambah');
     Route::post('admin/kategori', [CategoriesController::class, 'store'])->name('admin.kategori.store');
     Route::get('admin/kategori/{slug}/edit', [CategoriesController::class, 'edit'])->name('admin.kategori.edit');
-    Route::put('admin/kategori/{slug}', [CategoriesController::class, 'update'])->name('admin.kategori.update');
+    Route::put('admin/kategori/{id}', [CategoriesController::class, 'update'])->name('admin.kategori.update');
     Route::delete('admin/kategori/{id}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
 
 
@@ -74,8 +75,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin/tambah-tag', [TagsController::class, 'create'])->name('admin.tag.tambah');
     Route::post('admin/tag', [TagsController::class, 'store'])->name('admin.tag.store');
     Route::get('admin/tag/{slug}/edit', [TagsController::class, 'edit'])->name('admin.tag.edit');
-    Route::put('admin/tag/{slug}', [TagsController::class, 'update'])->name('admin.tag.update');
-    Route::delete('admin/kategori/{id}', [TagsController::class, 'destroy'])->name('admin.tag.destroy');
+    Route::put('admin/tag/{id}', [TagsController::class, 'update'])->name('admin.tag.update');
+    Route::delete('admin/tag/{id}', [TagsController::class, 'destroy'])->name('admin.tag.destroy');
 
 
     // Route::resource('/admin/', PostController::class);
