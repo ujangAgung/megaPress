@@ -41,17 +41,19 @@ const Katalog = (props) => {
                                     className="rounded-lg hover:shadow-xl"
                                 >
                                     <div>
-                                        <img
-                                            src={`/img/book/${book.gambar}`}
-                                            alt={book.slug}
-                                            className="rounded-t-lg"
-                                        />
+                                        <div className="flex justify-center items-center">
+                                            <img
+                                                src={`/img/book/${book.gambar}`}
+                                                alt={book.slug}
+                                                className="max-h-28"
+                                            />
+                                        </div>
                                         <div className="p-2">
                                             <h6 className="text-sm font-extralight my-1">
                                                 {book.kategori}
                                             </h6>
                                             <hr />
-                                            <h5 className="text-lg font-bold uppercase my-1">
+                                            <h5 className="text-md font-bold my-1">
                                                 {res}
                                             </h5>
                                             <p className="font-light text-orange-logo mb-2">

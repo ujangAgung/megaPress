@@ -45,6 +45,7 @@ Route::get('/acakan', function () {
 Route::get('/', [BooksController::class, 'index'])->name('user.buku.terakhir');
 Route::get('/katalog', [BooksController::class, 'katalog'])->name('user.katalog');
 Route::get('katalog/{slug}', [BooksController::class, 'showUser'])->name('user.katalog.show');
+Route::get('katalog/buku-kategori/{kategori}', [BooksController::class, 'getKatalog'])->name('user.katalog.kategori');
 
 // Admin
 Route::middleware(['auth', 'verified'])->group(function () {

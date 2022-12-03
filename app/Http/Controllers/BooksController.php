@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BooksCollection;
 use App\Models\Books;
 use App\Models\Categories;
 use App\Models\Tags;
@@ -29,11 +30,12 @@ class BooksController extends Controller
 
     public function indexAdmin()
     {
-        // dd(auth()->user());
+        $books = new BooksCollection(Books::paginate(10));
+
         return Inertia::render('Admin/Index', [
             'title' => 'Daftar Buku',
             'auth' => auth()->user(),
-            'books' => Books::all()
+            'books' => $books
         ]);
     }
 
@@ -44,6 +46,17 @@ class BooksController extends Controller
             'description' => 'Katalog Buku',
             'books' => Books::all(),
             'categories' => Categories::all()
+        ]);
+    }
+
+    public function getKatalog($kategori)
+    {
+        $category = Categories::where('slug', $kategori)->first();
+        $books = Books::where('kategori', $category);
+        dd($books);
+
+        return Inertia::render('User/Kategori', [
+            'books' => $books
         ]);
     }
 

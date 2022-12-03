@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "@inertiajs/inertia-react";
 
 import UserLayout from "./UserLayout";
+// import route from "vendor/tightenco/ziggy/src/js";
 
 const KatalogLayout = ({ categories, children, title }) => {
     return (
@@ -24,7 +25,10 @@ const KatalogLayout = ({ categories, children, title }) => {
                                     ? categories.map((category) => {
                                           return (
                                               <Link
-                                                  href="#"
+                                                  href={route(
+                                                      "user.katalog.kategori",
+                                                      category.slug
+                                                  )}
                                                   key={category.id}
                                                   className="hover:underline"
                                               >
