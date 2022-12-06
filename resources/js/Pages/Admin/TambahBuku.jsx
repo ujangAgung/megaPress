@@ -17,7 +17,7 @@ const TambahBuku = (props) => {
         halaman: "",
         keterangan: "",
         sinopsis: "",
-        kategori: "",
+        categories_id: "",
         tag: "",
     });
 
@@ -222,9 +222,7 @@ const TambahBuku = (props) => {
                                                 return (
                                                     <option
                                                         key={category.id}
-                                                        value={
-                                                            category.deskripsi
-                                                        }
+                                                        value={category.id}
                                                     >
                                                         {category.deskripsi}
                                                     </option>

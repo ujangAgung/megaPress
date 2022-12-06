@@ -1,24 +1,21 @@
-import React from "react";
-import { Head } from "@inertiajs/inertia-react";
-import { Link } from "@inertiajs/inertia-react";
+import { Head, Link, usePage } from "@inertiajs/inertia-react";
 
 import KatalogLayout from "@/Layouts/KatalogLayout";
 
-const Katalog = (props) => {
-    const books = props.books;
-    const categories = props.categories;
+const Katalog = () => {
+    const { books, categories, title } = usePage().props;
 
     return (
         <>
             <Head>
-                <title>{props.title}</title>
+                <title>{title}</title>
                 <meta
                     name="description"
                     content="Katalog Buku Penerbit Buku Sumedang Bandung Indonesia"
                 />
                 <link rel="icon" href="/img/icons.png" />
             </Head>
-            <KatalogLayout categories={categories} title={props.title}>
+            <KatalogLayout categories={categories} title={title}>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
                     {books.length > 0 ? (
                         books.map((book) => {
@@ -50,7 +47,7 @@ const Katalog = (props) => {
                                         </div>
                                         <div className="p-2">
                                             <h6 className="text-sm font-extralight my-1">
-                                                {book.kategori}
+                                                {book.categories_id}
                                             </h6>
                                             <hr />
                                             <h5 className="text-md font-bold my-1">

@@ -9,5 +9,11 @@ class Books extends Model
 {
     protected $table = 'books';
     protected $guarded = ['id'];
+
+    public function categories()
+    {
+        return $this->belongsTo(Categories::class);
+    }
+
     use HasFactory;
 }

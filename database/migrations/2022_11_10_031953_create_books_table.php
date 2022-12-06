@@ -23,10 +23,10 @@ return new class extends Migration
             $table->date('cetakan');
             $table->string('isbn');
             $table->string('ukuran');
-            $table->string('halaman');
+            $table->integer('halaman');
             $table->string('keterangan');
             $table->longText('sinopsis');
-            $table->string('kategori')->nullable();
+            $table->foreignId('categories_id')->nullable();
             $table->string('tag')->nullable();
             $table->timestamps();
         });

@@ -15,8 +15,8 @@ const KatalogLayout = ({ categories, children, title }) => {
                     <h5 className="font-semibold text-2xl uppercase mb-10">
                         {title}
                     </h5>
-                    <div className="flex">
-                        <div className="w-3/12 p-5 bg-white">
+                    <div className="md:flex bg-violet-600">
+                        <div className="md:w-3/12 md:p-5 bg-white invisible md:visible">
                             <h3 className="font-bold text-xl text-start mb-5">
                                 Filter
                             </h3>
@@ -39,7 +39,9 @@ const KatalogLayout = ({ categories, children, title }) => {
                                     : ""}
                             </ul>
                         </div>
-                        <div className="w-9/12 pl-3">{children}</div>
+                        <div className="-mt-24 md:-mt-0 md:w-9/12 md:pl-3 bg-yellow-300">
+                            {children}
+                        </div>
                     </div>
                 </div>
             </section>

@@ -61,9 +61,16 @@ class CategoriesController extends Controller
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function show(Categories $categories)
+    public function show(Categories $categories, $slug)
     {
-        //
+        $category = Categories::where('slug', $slug)->first();
+        $books = $category->books;
+        $categories = Categories::all();
+        return Inertia::render('User/Kategori', [
+            'title' => "Kategori Buku",
+            'books' => $books,
+            'categories' => $categories
+        ]);
     }
 
     /**

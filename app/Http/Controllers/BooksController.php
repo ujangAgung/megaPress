@@ -41,10 +41,13 @@ class BooksController extends Controller
 
     public function katalog()
     {
+        $books = Books::all();
+        // dd($books);
+
         return Inertia::render('User/Katalog', [
             'title' => 'Katalog',
             'description' => 'Katalog Buku',
-            'books' => Books::all(),
+            'books' => $books,
             'categories' => Categories::all()
         ]);
     }
@@ -83,7 +86,7 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->gambar);
+        
         // memberi nama supaya file tidak sama
         $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
         // dd($imgName);
@@ -93,19 +96,19 @@ class BooksController extends Controller
 
 
         Books::create([
-            'judul'      => $request->judul,
-            'gambar'     => $imgName,
-            'slug'       => Str::slug($request->judul, '-'),
-            'harga'      => $request->harga,
-            'penulis'    => $request->penulis,
-            'cetakan'    => $request->cetakan,
-            'isbn'       => $request->isbn,
-            'ukuran'     => $request->ukuran,
-            'halaman'    => $request->halaman,
-            'keterangan' => $request->keterangan,
-            'sinopsis'   => $request->sinopsis,
-            'kategori'   => $request->kategori,
-            'tag'        => $request->tag
+            'judul'           => $request->judul,
+            'gambar'          => $imgName,
+            'slug'            => Str::slug($request->judul, '-'),
+            'harga'           => $request->harga,
+            'penulis'         => $request->penulis,
+            'cetakan'         => $request->cetakan,
+            'isbn'            => $request->isbn,
+            'ukuran'          => $request->ukuran,
+            'halaman'         => $request->halaman,
+            'keterangan'      => $request->keterangan,
+            'sinopsis'        => $request->sinopsis,
+            'categories_id'   => $request->kategori,
+            'tag'             => $request->tag
         ]);
 
         return Redirect::route('admin.buku');
@@ -121,11 +124,13 @@ class BooksController extends Controller
     {
         // dd($slug);
         $books = Books::where('slug', $slug)->first();
+        // dd($books->categories->deskripsi);
+        $category = $books->categories->deskripsi;
         return Inertia::render('Admin/TampilBuku', [
             'data' => [
                 'title' => 'Buku',
                 'auth' => auth()->user(),
-                'books' => $books
+                'books' => $books,
             ]
         ]);
     }
@@ -192,7 +197,7 @@ class BooksController extends Controller
                 'halaman'    => 'required',
                 'keterangan' => 'required',
                 'sinopsis'   => 'required',
-                'kategori'   => 'required',
+                'categories_id'   => 'required',
                 'tag'        => 'required',
 
             ]);
@@ -213,7 +218,7 @@ class BooksController extends Controller
                 'halaman'    => 'required',
                 'keterangan' => 'required',
                 'sinopsis'   => 'required',
-                'kategori'   => 'required',
+                'categories_id'   => 'required',
                 'tag'        => 'required',
             ]);
             if ($request->gambar != $oldPict->gambar){
@@ -237,7 +242,7 @@ class BooksController extends Controller
                 'halaman'    => 'required',
                 'keterangan' => 'required',
                 'sinopsis'   => 'required',
-                'kategori'   => 'required',
+                'categories_id'   => 'required',
                 'tag'        => 'required',
             ]);
             $imgName = $oldPict->gambar;
@@ -255,7 +260,7 @@ class BooksController extends Controller
             'halaman'    => $request->halaman,
             'keterangan' => $request->keterangan,
             'sinopsis'   => $request->sinopsis,
-            'kategori'   => $request->kategori,
+            'categories_id'   => $request->kategori,
             'tag'        => $request->tag
         ]);
 

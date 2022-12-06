@@ -25,7 +25,6 @@ class StoreCategoriesRequest extends FormRequest
     {
         return [
             'deskripsi' => 'required',
-            // 'slug' => 'required',
         ];
     }
 }

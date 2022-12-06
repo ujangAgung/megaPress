@@ -7,6 +7,8 @@ import AdminLayout from "@/Layouts/AdminLayout";
 const TampilBuku = () => {
     const { data } = usePage().props;
     const books = data.books;
+    const kategori = data.books.categories.deskripsi;
+    console.log(books);
 
     const destroy = () => {
         if (confirm("Yakin ingin menghapus buku ini?")) {
@@ -56,7 +58,7 @@ const TampilBuku = () => {
                             </ul>
                             <p>
                                 <span className="font-bold">Kategori : </span>
-                                {books.kategori}
+                                {kategori}
                             </p>
                             <p>
                                 <span className="font-bold">Tag : </span>
