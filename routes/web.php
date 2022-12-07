@@ -44,6 +44,7 @@ Route::get('/acakan', function () {
 // User
 Route::get('/', [BooksController::class, 'index'])->name('user.buku.terakhir');
 Route::get('/katalog', [BooksController::class, 'katalog'])->name('user.katalog');
+Route::post('katalog/cari', [BooksController::class, 'cari'])->name('user.katalog.cari');
 Route::get('katalog/{slug}', [BooksController::class, 'showUser'])->name('user.katalog.show');
 // Route::get('katalog/buku-kategori/{kategori}', [BooksController::class, 'getKatalog'])->name('user.katalog.kategori');
 Route::get('katalog/buku-kategori/{slug}', [CategoriesController::class, 'show'])->name('user.katalog.kategori');

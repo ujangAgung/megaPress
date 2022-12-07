@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoriesRequest;
+use App\Http\Resources\BooksCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
@@ -64,7 +65,8 @@ class CategoriesController extends Controller
     public function show(Categories $categories, $slug)
     {
         $category = Categories::where('slug', $slug)->first();
-        $books = $category->books;
+        $books = $category->books();
+        $books = new BooksCollection($books->paginate(10));
         $categories = Categories::all();
         return Inertia::render('User/Kategori', [
             'title' => "Kategori Buku",

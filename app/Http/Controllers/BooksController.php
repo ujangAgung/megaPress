@@ -41,7 +41,8 @@ class BooksController extends Controller
 
     public function katalog()
     {
-        $books = Books::all();
+        // $books = Books::all();
+        $books = new BooksCollection(Books::paginate(10));
         // dd($books);
 
         return Inertia::render('User/Katalog', [
@@ -49,17 +50,6 @@ class BooksController extends Controller
             'description' => 'Katalog Buku',
             'books' => $books,
             'categories' => Categories::all()
-        ]);
-    }
-
-    public function getKatalog($kategori)
-    {
-        $category = Categories::where('slug', $kategori)->first();
-        $books = Books::where('kategori', $category);
-        dd($books);
-
-        return Inertia::render('User/Kategori', [
-            'books' => $books
         ]);
     }
 
@@ -137,14 +127,13 @@ class BooksController extends Controller
 
     public function showUser(Books $books ,$slug)
     {
-        // dd($slug);
         $books = Books::where('slug', $slug)->first();
         return inertia::render('User/TampilKatalog', [
             'data' => [
                 'title' => 'Detail Buku',
-                'auth' => auth()->user(),
                 'categories' => Categories::all(),
-                'books' => $books
+                'books' => $books,
+                'kategori' => $books->categories->deskripsi
             ]
         ]);
     }
@@ -182,7 +171,6 @@ class BooksController extends Controller
     public function update(Request $request, Books $books)
     {
         $oldPict = Books::find($request->id);
-        // dd($oldPict->gambar);
 
         if ($request->gambar != $oldPict->gambar){
             $request->validate([
@@ -287,5 +275,18 @@ class BooksController extends Controller
         }
         $del->delete();
         return Redirect::route('admin.buku')->with('message', 'Kategori Dihapus.');
+    }
+
+    public function cari(Request $request)
+    {
+        $cari = $request->cari;
+        $books = new BooksCollection(Books::where('judul','like',"%".$cari."%")->paginate(10));
+
+        return Inertia::render('User/Cari', [
+            'title' => 'Katalog',
+            'description' => 'Katalog Buku',
+            'books' => $books,
+            'categories' => Categories::all()
+        ]);
     }
 }

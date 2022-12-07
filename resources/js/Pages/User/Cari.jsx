@@ -3,7 +3,7 @@ import { Head, usePage } from "@inertiajs/inertia-react";
 import KatalogLayout from "@/Layouts/KatalogLayout";
 import BooksLayout from "@/Layouts/BooksLayout";
 
-const Katalog = () => {
+const Cari = () => {
     let { books } = usePage().props;
     const { categories, title } = usePage().props;
     const meta = books.meta;
@@ -27,4 +27,4 @@ const Katalog = () => {
     );
 };
 
-export default Katalog;
+export default Cari;
