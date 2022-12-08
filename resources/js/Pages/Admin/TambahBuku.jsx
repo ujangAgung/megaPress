@@ -21,6 +21,8 @@ const TambahBuku = (props) => {
         tag: "",
     });
 
+    console.log(errors);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route("admin.buku.store"), { forceFormData: true });
@@ -209,9 +211,12 @@ const TambahBuku = (props) => {
                                     <select
                                         id="kategori"
                                         className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-                                        value={data.kategori}
+                                        value={data.categories_id}
                                         onChange={(e) =>
-                                            setData("kategori", e.target.value)
+                                            setData(
+                                                "categories_id",
+                                                e.target.value
+                                            )
                                         }
                                     >
                                         <option value={""}>

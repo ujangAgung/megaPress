@@ -76,7 +76,23 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'judul'      => 'required|unique:books,judul',
+            'gambar'     => 'required|mimes:png,jpeg,jpg',
+            // 'slug'       => 'required',
+            'harga'      => 'required',
+            'penulis'    => 'required',
+            'cetakan'    => 'required',
+            'isbn'       => 'required',
+            'ukuran'     => 'required',
+            'halaman'    => 'required',
+            'keterangan' => 'required',
+            'sinopsis'   => 'required',
+            'categories_id'   => 'required',
+            'tag'        => 'required',
+
+        ]);
+
         // memberi nama supaya file tidak sama
         $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
         // dd($imgName);
@@ -97,7 +113,7 @@ class BooksController extends Controller
             'halaman'         => $request->halaman,
             'keterangan'      => $request->keterangan,
             'sinopsis'        => $request->sinopsis,
-            'categories_id'   => $request->kategori,
+            'categories_id'   => $request->categories_id,
             'tag'             => $request->tag
         ]);
 
@@ -248,7 +264,7 @@ class BooksController extends Controller
             'halaman'    => $request->halaman,
             'keterangan' => $request->keterangan,
             'sinopsis'   => $request->sinopsis,
-            'categories_id'   => $request->kategori,
+            'categories_id'   => $request->categories_id,
             'tag'        => $request->tag
         ]);
 

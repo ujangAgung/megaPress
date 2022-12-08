@@ -1,10 +1,20 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "@inertiajs/inertia-react";
 
+import { AiOutlineAlignLeft, AiOutlineCloseCircle } from "react-icons/ai";
+
 const AdminLayout = ({ auth, children }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <div className="flex relative">
-            <div className="w-2/12 h-screen py-8 px-3 fixed left-0 top-0 bottom-0 drop-shadow-2xl">
+        <div className="md:flex relative">
+            <div
+                className={
+                    isOpen == true
+                        ? "fixed top-0 left-0 min-h-screen z-50 bg-white w-1/2 p-5 md:hidden"
+                        : "md:w-2/12 min-h-screen py-8 px-3 fixed left-0 top-0 drop-shadow-2xl"
+                }
+            >
                 <Link href="/">
                     <img
                         src="/img/icons.png"
@@ -46,8 +56,16 @@ const AdminLayout = ({ auth, children }) => {
                 >
                     Logout
                 </Link>
+                <AiOutlineCloseCircle
+                    className="w-7 h-7 mt-5 mx-auto md:hidden"
+                    onClick={() => setIsOpen(!isOpen)}
+                />
             </div>
-            <div className="w-10/12 min-h-screen absolute right-0 top-0 bg-slate-100">
+            <div className="md:w-10/12 w-full min-h-screen absolute right-0 top-0 bg-slate-100">
+                <AiOutlineAlignLeft
+                    className="h-7 w-7 hover:cursor-pointer mt-5 md:hidden"
+                    onClick={() => setIsOpen(!isOpen)}
+                />
                 {children}
             </div>
         </div>

@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Link, useForm } from "@inertiajs/inertia-react";
+
+import { AiOutlineAlignLeft, AiOutlineCloseCircle } from "react-icons/ai";
 
 import UserLayout from "./UserLayout";
 
 const KatalogLayout = ({ categories, children, title }) => {
+    const [isOpen, setIsOpen] = useState(false);
     const { data, setData, errors, post } = useForm({
         cari: "",
     });
@@ -11,6 +15,8 @@ const KatalogLayout = ({ categories, children, title }) => {
         e.preventDefault();
         post(route("user.katalog.cari", data));
     };
+
+    console.log(isOpen);
 
     return (
         <UserLayout>
@@ -21,7 +27,14 @@ const KatalogLayout = ({ categories, children, title }) => {
                             <h5 className="text-3xl font-bold text-start uppercase hidden md:block">
                                 {title}
                             </h5>
-                            <h1 className="md:hidden">acakan</h1>
+                            <h1 className="md:hidden">
+                                <AiOutlineAlignLeft
+                                    className="w-10 h-10 hover:cursor-pointer"
+                                    onClick={() => {
+                                        setIsOpen(!isOpen);
+                                    }}
+                                />
+                            </h1>
                         </div>
                         <div>
                             <form onSubmit={handleSubmit}>
@@ -71,10 +84,24 @@ const KatalogLayout = ({ categories, children, title }) => {
                         </div>
                     </div>
                     <div className="md:flex">
-                        <div className="md:w-3/12 md:p-5 invisible md:visible">
-                            <h3 className="font-bold text-xl text-start mb-5">
-                                Filter
-                            </h3>
+                        <div
+                            className={
+                                isOpen == true
+                                    ? "fixed top-0 left-0 z-50 h-screen bg-white w-3/5 py-10 md:py-0 px-3"
+                                    : "md:w-3/12 md:p-5 invisible md:visible"
+                            }
+                        >
+                            <div className="flex justify-between items-center mb-5">
+                                <h3 className="font-bold text-xl text-start">
+                                    Filter
+                                </h3>
+                                <AiOutlineCloseCircle
+                                    className="h-8 w-8 hover:cursor-pointer md:hidden"
+                                    onClick={() => {
+                                        setIsOpen(!isOpen);
+                                    }}
+                                />
+                            </div>
                             <ul className="uppercase font-semibold">
                                 {categories.length > 0
                                     ? categories.map((category) => {

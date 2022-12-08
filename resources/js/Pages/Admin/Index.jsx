@@ -1,25 +1,21 @@
-import React from "react";
 import { Link, Head } from "@inertiajs/inertia-react";
 
 import AdminLayout from "@/Layouts/AdminLayout";
 import Paginator from "@/Components/Paginator";
 
 const Index = (props) => {
-    console.log(props.links);
     const Books = props.books.data;
     const meta = props.books.meta;
     const links = props.books.links;
+
     return (
         <>
             <Head>
                 <title>{props.title}</title>
             </Head>
             <AdminLayout auth={props.auth}>
-                <div className="container mx-auto">
-                    <h2 className="text-5xl font-bold mt-10 mb-5">
-                        Daftar Buku
-                    </h2>
-
+                <div className="container mx-auto px-5">
+                    <h2 className="text-5xl font-bold my-5">Daftar Buku</h2>
                     <Link
                         href="/admin/tambah-buku"
                         className="py-2 px-3 font-bold border rounded-xl shadow-2xl border-orange-logo hover:bg-orange-logo hover:text-white"

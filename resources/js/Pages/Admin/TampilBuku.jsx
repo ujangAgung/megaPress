@@ -8,7 +8,6 @@ const TampilBuku = () => {
     const { data } = usePage().props;
     const books = data.books;
     const kategori = data.books.categories.deskripsi;
-    console.log(books);
 
     const destroy = () => {
         if (confirm("Yakin ingin menghapus buku ini?")) {

@@ -20,12 +20,10 @@ const EditBuku = () => {
         halaman: book.halaman || "",
         keterangan: book.keterangan || "",
         sinopsis: book.sinopsis || "",
-        kategori: book.kategori || "",
+        categories_id: book.categories_id || "",
         tag: book.tag || "",
         _method: "PUT",
     });
-
-    console.log(errors);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -211,9 +209,12 @@ const EditBuku = () => {
                                     <select
                                         id="kategori"
                                         className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-                                        value={data.kategori}
+                                        value={data.categories_id}
                                         onChange={(e) =>
-                                            setData("kategori", e.target.value)
+                                            setData(
+                                                "categories_id",
+                                                e.target.value
+                                            )
                                         }
                                     >
                                         <option value={""}>
@@ -224,9 +225,7 @@ const EditBuku = () => {
                                                 return (
                                                     <option
                                                         key={category.id}
-                                                        value={
-                                                            category.deskripsi
-                                                        }
+                                                        value={category.id}
                                                     >
                                                         {category.deskripsi}
                                                     </option>
