@@ -63,23 +63,28 @@ const TampilBuku = () => {
                                 <span className="font-bold">Tag : </span>
                                 {books.tag}
                             </p>
-                            <ul className="flex my-5">
-                                <Link
-                                    href={route("admin.buku.edit", books.slug)}
-                                    className="text-xl rounded-full uppercase py-1 font-bold px-4 mr-3 text-white bg-blue-600 hover:cursor-pointer hover:bg-blue-900"
-                                >
-                                    <li>Edit</li>
-                                </Link>
-                                <li className="">
-                                    <button
-                                        onClick={destroy}
-                                        type="button"
-                                        className="text-xl rounded-full uppercase py-1 font-bold px-4 mr-3 text-white bg-red-600 hover:cursor-pointer hover:bg-red-900"
+                            {data.auth.role != "admin" && (
+                                <ul className="flex my-5">
+                                    <Link
+                                        href={route(
+                                            "admin.buku.edit",
+                                            books.slug
+                                        )}
+                                        className="text-xl rounded-full uppercase py-1 font-bold px-4 mr-3 text-white bg-blue-600 hover:cursor-pointer hover:bg-blue-900"
                                     >
-                                        hapus
-                                    </button>
-                                </li>
-                            </ul>
+                                        <li>Edit</li>
+                                    </Link>
+                                    <li className="">
+                                        <button
+                                            onClick={destroy}
+                                            type="button"
+                                            className="text-xl rounded-full uppercase py-1 font-bold px-4 mr-3 text-white bg-red-600 hover:cursor-pointer hover:bg-red-900"
+                                        >
+                                            hapus
+                                        </button>
+                                    </li>
+                                </ul>
+                            )}
                         </div>
                     </div>
                     <div className="text-justify">

@@ -9,6 +9,7 @@ import { Head, Link, useForm } from "@inertiajs/inertia-react";
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
+        role: "admin",
         email: "",
         password: "",
         password_confirmation: "",
@@ -118,7 +119,7 @@ export default function Register() {
                         href={route("login")}
                         className="underline text-sm text-gray-600 hover:text-gray-900"
                     >
-                        Already registered?
+                        Sudah punya akun?
                     </Link>
 
                     <PrimaryButton className="ml-4" processing={processing}>

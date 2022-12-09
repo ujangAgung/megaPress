@@ -30,6 +30,7 @@ class BooksController extends Controller
 
     public function indexAdmin()
     {
+        // dd(auth());
         $books = new BooksCollection(Books::paginate(10));
 
         return Inertia::render('Admin/Index', [

@@ -22,15 +22,15 @@ use App\Models\Books;
 */
 
 
-Route::get('/kontak', function () {
-    return Inertia::render('User/Kontak', [
-        'title' => 'Kontak'
-    ]);
-});
+// Route::get('/kontak', function () {
+//     return Inertia::render('User/Kontak', [
+//         'title' => 'Kontak'
+//     ]);
+// });
 
-Route::get('/acakanlay', function () {
-    return Inertia::render('Admin/Index');
-});
+// Route::get('/acakanlay', function () {
+//     return Inertia::render('Admin/Index');
+// });
 
 Route::get('/acakan', function () {
     return Inertia::render('Welcome', [
@@ -68,7 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin/kategori', [CategoriesController::class, 'index'])->name('admin.kategori');
     Route::get('admin/tambah-kategori', [CategoriesController::class, 'create'])->name('admin.kategori.tambah');
     Route::post('admin/kategori', [CategoriesController::class, 'store'])->name('admin.kategori.store');
-    Route::get('admin/kategori/{slug}/edit', [CategoriesController::class, 'edit'])->name('admin.kategori.edit');
+    Route::get('admin/kategori/{slug}/edit', [CategoriesController::class, 'edit'])->name('admin.kategori.edit')->middleware('checkRole');
     Route::put('admin/kategori/{id}', [CategoriesController::class, 'update'])->name('admin.kategori.update');
     Route::delete('admin/kategori/{id}', [CategoriesController::class, 'destroy'])->name('admin.kategori.destroy');
 

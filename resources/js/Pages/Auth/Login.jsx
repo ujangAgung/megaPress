@@ -88,7 +88,7 @@ export default function Login({ status, canResetPassword }) {
                             handleChange={onHandleChange}
                         />
 
-                        <span className="ml-2 text-sm text-gray-600">
+                        <span className="ml-2 text-sm text-gray-600 hidden">
                             Remember me
                         </span>
                     </label>
