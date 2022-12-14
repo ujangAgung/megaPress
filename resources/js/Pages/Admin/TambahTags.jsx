@@ -19,11 +19,10 @@ const TambahTags = (props) => {
             <Head>
                 <title>{props.title}</title>
             </Head>
-            <AdminLayout auth={props.auth}>
+            <AdminLayout auth={props.auth} title={props.title}>
                 <div className="px-5">
                     <form name="createForm" onSubmit={handleSubmit}>
                         <div className="container mx-auto mt-10">
-                            <h1 className="text-4xl">Tambah Kategori</h1>
                             <div className="relative z-0 my-6 w-full group">
                                 <input
                                     type="text"

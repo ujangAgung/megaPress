@@ -3,12 +3,10 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\TagsController;
-use App\Models\Books;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,39 +20,31 @@ use App\Models\Books;
 */
 
 
-// Route::get('/kontak', function () {
-//     return Inertia::render('User/Kontak', [
-//         'title' => 'Kontak'
-//     ]);
-// });
-
-// Route::get('/acakanlay', function () {
-//     return Inertia::render('Admin/Index');
-// });
-
-Route::get('/acakan', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+Route::get('/kontak', function () {
+    return Inertia::render('User/Kontak', [
+        'title' => 'Kontak'
     ]);
 });
+
+
+// Route::get('/acakan', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 // User
 Route::get('/', [BooksController::class, 'index'])->name('user.buku.terakhir');
 Route::get('/katalog', [BooksController::class, 'katalog'])->name('user.katalog');
 Route::post('katalog/cari', [BooksController::class, 'cari'])->name('user.katalog.cari');
 Route::get('katalog/{slug}', [BooksController::class, 'showUser'])->name('user.katalog.show');
-// Route::get('katalog/buku-kategori/{kategori}', [BooksController::class, 'getKatalog'])->name('user.katalog.kategori');
 Route::get('katalog/buku-kategori/{slug}', [CategoriesController::class, 'show'])->name('user.katalog.kategori');
 
 // Admin
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return Inertia::render('Dashboard');
-    // })->name('dashboard');
-
     Route::get('admin', [BooksController::class, 'indexAdmin'])->name('admin.buku');
     Route::get('admin/tambah-buku', [BooksController::class, 'create'])->name('admin.buku.tambah');
     Route::post('admin/buku', [BooksController::class, 'store'])->name('admin.buku.store');
@@ -77,12 +67,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin/tag', [TagsController::class, 'index'])->name('admin.tag');
     Route::get('admin/tambah-tag', [TagsController::class, 'create'])->name('admin.tag.tambah');
     Route::post('admin/tag', [TagsController::class, 'store'])->name('admin.tag.store');
-    Route::get('admin/tag/{slug}/edit', [TagsController::class, 'edit'])->name('admin.tag.edit');
+    Route::get('admin/tag/{slug}/edit', [TagsController::class, 'edit'])->name('admin.tag.edit')->middleware('checkRole');
     Route::put('admin/tag/{id}', [TagsController::class, 'update'])->name('admin.tag.update');
     Route::delete('admin/tag/{id}', [TagsController::class, 'destroy'])->name('admin.tag.destroy');
 
-
-    // Route::resource('/admin/', PostController::class);
 });
 
 

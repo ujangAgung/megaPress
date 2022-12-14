@@ -26,7 +26,7 @@ const TampilBuku = () => {
             <Head>
                 <title>{books.judul}</title>
             </Head>
-            <AdminLayout auth={data.auth}>
+            <AdminLayout auth={data.auth} title={data.title}>
                 <div className="p-5">
                     <div className="flex">
                         <div className="w-1/2 flex">

@@ -35,7 +35,7 @@ const EditBuku = () => {
             <Head>
                 <title>{datas.title}</title>
             </Head>
-            <AdminLayout auth={datas.auth}>
+            <AdminLayout auth={datas.auth} title={datas.title}>
                 <div className="px-5 mb-10">
                     <form
                         name="createForm"
@@ -43,7 +43,6 @@ const EditBuku = () => {
                         encType="multipart/form-data"
                     >
                         <div className="container mx-auto mt-10">
-                            <h1 className="text-4xl">{datas.title}</h1>
                             <div className="relative z-0 my-6 w-full group">
                                 <input
                                     type="text"

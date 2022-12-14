@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/inertia-react";
 
 import { AiOutlineAlignLeft, AiOutlineCloseCircle } from "react-icons/ai";
 
-const AdminLayout = ({ auth, children }) => {
+const AdminLayout = ({ auth, children, title }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -62,10 +62,13 @@ const AdminLayout = ({ auth, children }) => {
                 />
             </div>
             <div className="md:w-10/12 w-full min-h-screen absolute right-0 top-0 bg-slate-100">
-                <AiOutlineAlignLeft
-                    className="h-7 w-7 hover:cursor-pointer mt-5 md:hidden"
-                    onClick={() => setIsOpen(!isOpen)}
-                />
+                <div className="flex justify-between px-5">
+                    <AiOutlineAlignLeft
+                        className="h-7 w-7 hover:cursor-pointer mt-5 md:hidden"
+                        onClick={() => setIsOpen(!isOpen)}
+                    />
+                    <h3 className="text-4xl font-bold my-5">{title}</h3>
+                </div>
                 {children}
             </div>
         </div>

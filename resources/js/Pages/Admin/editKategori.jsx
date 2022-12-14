@@ -28,11 +28,10 @@ const editKategori = () => {
             <Head>
                 <title>{category.title}</title>
             </Head>
-            <AdminLayout auth={category.auth}>
+            <AdminLayout auth={category.auth} title={category.title}>
                 <div className="p-5">
                     <form onSubmit={handleSubmit}>
                         <div className="container mx-auto mt-10">
-                            <h1 className="text-4xl">{category.title}</h1>
                             <div className="relative z-0 my-6 w-full group">
                                 <input
                                     type="text"

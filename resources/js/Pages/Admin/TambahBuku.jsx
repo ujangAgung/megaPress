@@ -33,7 +33,7 @@ const TambahBuku = (props) => {
             <Head>
                 <title>{props.title}</title>
             </Head>
-            <AdminLayout auth={props.auth}>
+            <AdminLayout auth={props.auth} title={props.title}>
                 <div className="px-5 mb-10">
                     <form
                         name="createForm"
@@ -41,7 +41,6 @@ const TambahBuku = (props) => {
                         encType="multipart/form-data"
                     >
                         <div className="container mx-auto mt-10">
-                            <h1 className="text-4xl">{props.title}</h1>
                             <div className="relative z-0 my-6 w-full group">
                                 <input
                                     type="text"

@@ -49,12 +49,8 @@ const Kategori = (props) => {
             <Head>
                 <title>{props.title}</title>
             </Head>
-            <AdminLayout auth={props.auth}>
+            <AdminLayout auth={props.auth} title={props.title}>
                 <div className="container mx-auto px-5">
-                    <h2 className="text-5xl font-bold mt-10 mb-5">
-                        Daftar Kategori
-                    </h2>
-
                     <Link
                         href="/admin/tambah-kategori"
                         className="py-2 px-3 font-bold border rounded-xl shadow-2xl border-orange-logo hover:bg-orange-logo hover:text-white"

@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Link, useForm } from "@inertiajs/inertia-react";
 
-import { AiOutlineAlignLeft, AiOutlineCloseCircle } from "react-icons/ai";
+import {
+    AiOutlineAlignLeft,
+    AiOutlineCloseCircle,
+    AiOutlineMenu,
+} from "react-icons/ai";
 
 import UserLayout from "./UserLayout";
 
@@ -28,7 +32,7 @@ const KatalogLayout = ({ categories, children, title }) => {
                                 {title}
                             </h5>
                             <h1 className="md:hidden">
-                                <AiOutlineAlignLeft
+                                <AiOutlineMenu
                                     className="w-10 h-10 hover:cursor-pointer"
                                     onClick={() => {
                                         setIsOpen(!isOpen);
@@ -102,20 +106,26 @@ const KatalogLayout = ({ categories, children, title }) => {
                                     }}
                                 />
                             </div>
+                            <hr />
                             <ul className="uppercase font-semibold">
                                 {categories.length > 0
                                     ? categories.map((category) => {
                                           return (
-                                              <Link
-                                                  href={route(
-                                                      "user.katalog.kategori",
-                                                      category.slug
-                                                  )}
-                                                  key={category.id}
-                                                  className="hover:underline"
-                                              >
-                                                  <li>{category.deskripsi}</li>
-                                              </Link>
+                                              <>
+                                                  <Link
+                                                      href={route(
+                                                          "user.katalog.kategori",
+                                                          category.slug
+                                                      )}
+                                                      key={category.id}
+                                                      className="text-start w-full"
+                                                  >
+                                                      <li className="py-2 hover:bg-orange-logo hover:text-white rounded-lg hover:pl-3">
+                                                          {category.deskripsi}
+                                                      </li>
+                                                      <hr />
+                                                  </Link>
+                                              </>
                                           );
                                       })
                                     : ""}

@@ -13,9 +13,8 @@ const Index = (props) => {
             <Head>
                 <title>{props.title}</title>
             </Head>
-            <AdminLayout auth={props.auth}>
-                <div className="container mx-auto px-5">
-                    <h2 className="text-5xl font-bold my-5">Daftar Buku</h2>
+            <AdminLayout auth={props.auth} title={props.title}>
+                <div className="container mx-auto px-5 pt-10">
                     <Link
                         href="/admin/tambah-buku"
                         className="py-2 px-3 font-bold border rounded-xl shadow-2xl border-orange-logo hover:bg-orange-logo hover:text-white"
