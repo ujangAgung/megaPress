@@ -77,9 +77,13 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
+        // $gmbrHps = store('gambar');
+        // dd($gmbrHps);
+        // ddd($request->file('gambar')->store('book'));
+        // return $request->file('gambar')->store('book');
         $request->validate([
-            'judul'      => 'required|unique:books,judul',
-            'gambar'     => 'required|mimes:png,jpeg,jpg',
+            'judul'      => 'required|unique:books,judul|max:255',
+            'gambar'     => 'required|image|file|max:1024|mimes:png,jpeg,jpg',
             // 'slug'       => 'required',
             'harga'      => 'required',
             'penulis'    => 'required',
@@ -95,16 +99,17 @@ class BooksController extends Controller
         ]);
 
         // memberi nama supaya file tidak sama
-        $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
+        // $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
         // dd($imgName);
         
         // memindahkan file ke dirctory public
-        $request->gambar->move(public_path('img/book'), $imgName);
+        // $request->gambar->move(public_path('img/book'), $imgName);
+        $request->gambar->store('book');
 
 
         Books::create([
             'judul'           => $request->judul,
-            'gambar'          => $imgName,
+            'gambar'          => $request->file('gambar')->store('book'),
             'slug'            => Str::slug($request->judul, '-'),
             'harga'           => $request->harga,
             'penulis'         => $request->penulis,
@@ -188,11 +193,14 @@ class BooksController extends Controller
     public function update(Request $request, Books $books)
     {
         $oldPict = Books::find($request->id);
+        $gmbrHps = public_path('storage/'. $oldPict->gambar);
+
+        // dd(public_path('storage/'. $oldPict->gambar));
 
         if ($request->gambar != $oldPict->gambar){
             $request->validate([
                 'judul'      => 'required',
-                'gambar'     => 'required|mimes:png,jpeg,jpg',
+                'gambar'     => 'required|image|file|max:1024|mimes:png,jpeg,jpg',
                 // 'slug'       => 'required',
                 'harga'      => 'required',
                 'penulis'    => 'required',
@@ -206,9 +214,11 @@ class BooksController extends Controller
                 'tag'        => 'required',
 
             ]);
-            $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
+            unlink($gmbrHps);
+            $imgName = $request->file('gambar')->store('book');
+            $request->gambar->store('book');
 
-            $request->gambar->move(public_path('img/book'), $imgName);
+            // $request->gambar->move(public_path('img/book'), $imgName);
 
         }elseif ($request->judul != $oldPict->judul) {
             $request->validate([
@@ -227,10 +237,12 @@ class BooksController extends Controller
                 'tag'        => 'required',
             ]);
             if ($request->gambar != $oldPict->gambar){
-                $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
-
+                // $imgName = $request->gambar->getClientOriginalName() . '-' . time() . '.' . $request->gambar->extension();
+                unlink($gmbrHps);
+                $imgName = $request->file('gambar')->store('book');
+                $request->gambar->store('book');
             // memindahkan file ke dirctory public
-            $request->gambar->move(public_path('img/book/'), $imgName);
+            // $request->gambar->move(public_path('img/book/'), $imgName);
             }else {
                 $imgName = $oldPict->gambar;
             }

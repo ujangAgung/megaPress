@@ -32,7 +32,7 @@ const TampilBuku = () => {
                         <div className="w-1/2 flex">
                             <div className="m-auto">
                                 <img
-                                    src={`/img/book/${books.gambar}`}
+                                    src={`/storage/${books.gambar}`}
                                     alt={books.slug}
                                 />
                             </div>

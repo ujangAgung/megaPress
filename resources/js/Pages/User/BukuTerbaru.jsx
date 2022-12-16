@@ -23,7 +23,7 @@ const BukuTerbaru = (props) => {
                                 <div className="w-full md:w-1/3 flex">
                                     <div className="m-auto">
                                         <img
-                                            src={`/img/book/${book.gambar}`}
+                                            src={`/storage/${book.gambar}`}
                                             alt={book.slug}
                                         />
                                     </div>

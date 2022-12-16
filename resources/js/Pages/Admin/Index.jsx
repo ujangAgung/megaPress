@@ -47,7 +47,7 @@ const Index = (props) => {
                                         <div>
                                             <img
                                                 className="bg-black rounded-t-lg"
-                                                src={`/img/book/${book.gambar}`}
+                                                src={`/storage/${book.gambar}`}
                                                 alt={book.slug}
                                             />
                                             <div className="p-2">

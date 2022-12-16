@@ -3,6 +3,7 @@ import { Link } from "@inertiajs/inertia-react";
 import Paginator from "@/Components/Paginator";
 
 const BooksLayout = ({ books, links, meta }) => {
+    // console.log(asset());
     return (
         <>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
@@ -29,7 +30,8 @@ const BooksLayout = ({ books, links, meta }) => {
                                 <div>
                                     <div className="flex justify-center items-center">
                                         <img
-                                            src={`/img/book/${book.gambar}`}
+                                            // src={`/img/book/${book.gambar}`}
+                                            src={`/storage/${book.gambar}`}
                                             alt={book.slug}
                                             className="max-h-28"
                                         />
