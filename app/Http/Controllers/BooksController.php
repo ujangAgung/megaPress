@@ -24,7 +24,9 @@ class BooksController extends Controller
         return Inertia::render('User/index', [
             'title' => 'Home',
             'description' => "Mega Press adalah Penerbit buku di Indonesia yang berdiri pada Tahun 2022, yang sudah memiliki ISBN dan terdaftar sebagai Anggota IKAPI. Bertempatkan di Sumedang Bandung Jawa Barat Indonesia",
-            'books' => Books::all()
+            // 'books' => Books::all()
+            // orderBy('id', 'desc')->take(5)->get();
+            'books' => Books::latest()->take(5)->get()
         ]);
     }
 
@@ -123,7 +125,7 @@ class BooksController extends Controller
             'tag'             => $request->tag
         ]);
 
-        return Redirect::route('admin.buku');
+        return Redirect::route('admin.buku')->with('add', 'Data buku ditambahkan.');
     }
 
     /**
@@ -281,7 +283,7 @@ class BooksController extends Controller
             'tag'        => $request->tag
         ]);
 
-        return Redirect::route('admin.buku');
+        return Redirect::route('admin.buku')->with('edit', 'Data buku disunting.');
     }
 
     /**
@@ -303,7 +305,7 @@ class BooksController extends Controller
             }
         }
         $del->delete();
-        return Redirect::route('admin.buku')->with('message', 'Kategori Dihapus.');
+        return Redirect::route('admin.buku')->with('delete', 'Data buku dihapus.');
     }
 
     public function cari(Request $request)

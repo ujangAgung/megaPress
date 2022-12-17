@@ -17,7 +17,7 @@ const Paginator = ({ links, meta }) => {
                 <span className="font-semibold text-gray-900 mx-1">
                     {totalData}
                 </span>
-                buku.
+                data.
             </span>
             {/* <!-- Buttons --> */}
             <div className="inline-flex mt-2 xs:mt-0">

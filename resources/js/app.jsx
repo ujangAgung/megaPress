@@ -6,6 +6,7 @@ import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/inertia-react";
 import { InertiaProgress } from "@inertiajs/progress";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
+import swal from "sweetalert";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Mega Press";

@@ -18,9 +18,17 @@ const editKategori = () => {
     };
 
     const destroy = () => {
-        if (confirm("Yakin ingin menghapus kategori ini?")) {
-            Inertia.delete(route("admin.kategori.destroy", data.id));
-        }
+        swal({
+            title: "Apa kamu yakin?",
+            text: "Data akan dihapus secara Permanen!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                Inertia.delete(route("admin.kategori.destroy", data.id));
+            }
+        });
     };
 
     return (
@@ -51,6 +59,11 @@ const editKategori = () => {
                                 >
                                     Deskripsi
                                 </label>
+                                {errors.deskripsi && (
+                                    <span className="text-xs italic text-red-700">
+                                        {errors.deskripsi}
+                                    </span>
+                                )}
                             </div>
                             <div className="flex justify-between">
                                 <button

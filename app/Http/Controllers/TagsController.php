@@ -50,7 +50,7 @@ class TagsController extends Controller
         $categories->slug = Str::slug($request->deskripsi, '-');
         $categories->save();
 
-        return Redirect::route('admin.tag');
+        return Redirect::route('admin.tag')->with('add', 'Tag ditambahkan.');
     }
 
     /**
@@ -91,11 +91,21 @@ class TagsController extends Controller
      */
     public function update(Request $request, Tags $tags)
     {
+        $oldTag = Tags::find($request->id);
+        if ($request->deskripsi != $oldTag->deskripsi) {
+            $request->validate([
+                'deskripsi' => 'required|unique:tags,deskripsi'
+            ]);
+        }else {
+            $request->validate([
+                'deskripsi' => 'required'
+            ]);
+        }
         Tags::where('id' , $request->id)->update([
             'deskripsi' => $request->deskripsi,
             'slug' => Str::slug($request->deskripsi, '-')
         ]);
-        return Redirect::route('admin.tag');
+        return Redirect::route('admin.tag')->with('edit', 'Kategori disunting.');
     }
 
     /**
@@ -108,6 +118,6 @@ class TagsController extends Controller
     {
         $tag = Tags::find($request->id);
         $tag->delete();
-        return Redirect::route('admin.tag')->with('message', 'Tag Dihapus.');
+        return Redirect::route('admin.tag')->with('delete', 'Tag dihapus.');
     }
 }

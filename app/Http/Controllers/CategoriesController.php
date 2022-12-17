@@ -6,6 +6,7 @@ use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoriesRequest;
 use App\Http\Resources\BooksCollection;
+use App\Http\Resources\CategoriesCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
@@ -20,10 +21,11 @@ class CategoriesController extends Controller
      */
     public function index()
     {
+        $categories = new CategoriesCollection(Categories::paginate(10));
         return Inertia::render('Admin/Kategori', [
             'title' => 'Kategori',
             'auth' => auth()->user(),
-            'kategori' => Categories::all()
+            'kategori' => $categories
         ]);
     }
 
@@ -53,7 +55,7 @@ class CategoriesController extends Controller
         $categories->slug = Str::slug($request->deskripsi, '-');
         $categories->save();
 
-        return Redirect::route('admin.kategori');
+        return Redirect::route('admin.kategori')->with('add', 'Kategori ditambahkan.');
     }
 
     /**
@@ -102,11 +104,21 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categories $categories)
     {
+        $oldCategory = Categories::find($request->id);
+        if($request->deskripsi != $oldCategory->deskripsi) {
+            $request->validate([
+                'deskripsi' => 'required|unique:categories,deskripsi'
+            ]);
+        }else {
+            $request->validate([
+                'deskripsi' => 'required'
+            ]);
+        }
         Categories::where('id', $request->id)->update([
             'deskripsi' => $request->deskripsi,
             'slug' => Str::slug($request->deskripsi, '-')
         ]);
-        return Redirect::route('admin.kategori');
+        return Redirect::route('admin.kategori')->with('edit', 'Kategori disunting.');
     }
 
     /**
@@ -119,6 +131,6 @@ class CategoriesController extends Controller
     {
         $kategori = Categories::find($request->id);
         $kategori->delete();
-        return Redirect::route('admin.kategori')->with('message', 'Kategori Dihapus.');
+        return Redirect::route('admin.kategori')->with('delete', 'Kategori Dihapus.');
     }
 }

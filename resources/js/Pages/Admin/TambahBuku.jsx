@@ -9,7 +9,7 @@ const TambahBuku = (props) => {
     const { data, setData, errors, post } = useForm({
         judul: "",
         gambar: null,
-        harga: 0,
+        harga: null,
         penulis: "",
         cetakan: "",
         isbn: "ISBN belum terbit",
@@ -20,8 +20,6 @@ const TambahBuku = (props) => {
         categories_id: "",
         tag: "",
     });
-
-    console.log(errors);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -45,6 +43,7 @@ const TambahBuku = (props) => {
                                 <input
                                     type="text"
                                     name="judul"
+                                    errors={errors.judul}
                                     id="judul"
                                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                     placeholder=""
@@ -60,6 +59,11 @@ const TambahBuku = (props) => {
                                 >
                                     Judul
                                 </label>
+                                {errors.judul && (
+                                    <span className="text-xs italic text-red-700">
+                                        {errors.judul}
+                                    </span>
+                                )}
                             </div>
                             <div className="grid md:grid-cols-2 md:gap-6">
                                 <div className="relative z-0 mb-6 w-full group">
@@ -81,6 +85,11 @@ const TambahBuku = (props) => {
                                     >
                                         Penulis
                                     </label>
+                                    {errors.penulis && (
+                                        <span className="text-xs italic text-red-700">
+                                            {errors.penulis}
+                                        </span>
+                                    )}
                                 </div>
                                 <div className="relative z-0 mb-6 w-full group">
                                     <input
@@ -107,6 +116,11 @@ const TambahBuku = (props) => {
                                         *diisi angka dan tidak boleh menggunakan
                                         titik.
                                     </span>
+                                    {errors.harga && (
+                                        <span className="text-xs italic text-red-700">
+                                            {errors.harga}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <div className="grid md:grid-cols-2 md:gap-6">
@@ -129,6 +143,11 @@ const TambahBuku = (props) => {
                                     >
                                         Cetakan
                                     </label>
+                                    {errors.cetakan && (
+                                        <span className="text-xs italic text-red-700">
+                                            {errors.cetakan}
+                                        </span>
+                                    )}
                                 </div>
                                 <div className="relative z-0 mb-6 w-full group">
                                     <input
@@ -154,6 +173,11 @@ const TambahBuku = (props) => {
                                         *jika telah memiliki isbn maka masukan
                                         disini
                                     </span>
+                                    {errors.isbn && (
+                                        <span className="text-xs italic text-red-700">
+                                            {errors.isbn}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <div className="grid md:grid-cols-2 md:gap-6">
@@ -176,6 +200,11 @@ const TambahBuku = (props) => {
                                     >
                                         Ukuran
                                     </label>
+                                    {errors.ukuran && (
+                                        <span className="text-xs italic text-red-700">
+                                            {errors.ukuran}
+                                        </span>
+                                    )}
                                 </div>
                                 <div className="relative z-0 mb-6 w-full group">
                                     <input
@@ -197,6 +226,11 @@ const TambahBuku = (props) => {
                                     >
                                         Halaman
                                     </label>
+                                    {errors.halaman && (
+                                        <span className="text-xs italic text-red-700">
+                                            {errors.halaman}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <div className="grid md:grid-cols-2 md:gap-6">
@@ -297,7 +331,6 @@ const TambahBuku = (props) => {
                                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                     placeholder=""
                                     required
-                                    // value={data.gambar}
                                     onChange={(e) =>
                                         setData("gambar", e.target.files[0])
                                     }
@@ -308,6 +341,14 @@ const TambahBuku = (props) => {
                                 >
                                     Gambar
                                 </label>
+                                <span className="text-xs italic text-gray-500">
+                                    *maksimal 1 MB.
+                                </span>
+                                {errors.gambar && (
+                                    <span className="text-xs italic text-red-700">
+                                        {errors.gambar}
+                                    </span>
+                                )}
                             </div>
                             <div className="relative z-0 mb-6 w-full group">
                                 <textarea
@@ -327,6 +368,11 @@ const TambahBuku = (props) => {
                                 >
                                     Sinopsis
                                 </label>
+                                {errors.sinopsis && (
+                                    <span className="text-xs italic text-red-700">
+                                        {errors.sinopsis}
+                                    </span>
+                                )}
                             </div>
                             <button
                                 type="submit"

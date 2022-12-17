@@ -10,9 +10,17 @@ const TampilBuku = () => {
     const kategori = data.books.categories.deskripsi;
 
     const destroy = () => {
-        if (confirm("Yakin ingin menghapus buku ini?")) {
-            Inertia.delete(route("admin.buku.destroy", books.id));
-        }
+        swal({
+            title: "Apa kamu yakin?",
+            text: "Data akan dihapus secara Permanen!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                Inertia.delete(route("admin.buku.destroy", books.id));
+            }
+        });
     };
 
     const nominal = books.harga;

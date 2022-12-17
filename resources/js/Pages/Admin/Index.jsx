@@ -7,6 +7,29 @@ const Index = (props) => {
     const Books = props.books.data;
     const meta = props.books.meta;
     const links = props.books.links;
+    const flash = props.flash;
+
+    flash.add &&
+        swal({
+            title: "Berhasil!",
+            text: flash.add,
+            icon: "success",
+            button: "Wokee",
+        });
+    flash.delete &&
+        swal({
+            title: "Dihapus!",
+            text: flash.delete,
+            icon: "warning",
+            button: "Wokee",
+        });
+    flash.edit &&
+        swal({
+            title: "Disunting!",
+            text: flash.edit,
+            icon: "info",
+            button: "Wokee",
+        });
 
     return (
         <>
@@ -14,14 +37,14 @@ const Index = (props) => {
                 <title>{props.title}</title>
             </Head>
             <AdminLayout auth={props.auth} title={props.title}>
-                <div className="container mx-auto px-5 pt-10">
+                <div className="container mx-auto px-5 pt-5">
                     <Link
                         href="/admin/tambah-buku"
                         className="py-2 px-3 font-bold border rounded-xl shadow-2xl border-orange-logo hover:bg-orange-logo hover:text-white"
                     >
                         Tambah Buku
                     </Link>
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 mt-8">
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 mt-8">
                         {Books.length > 0 ? (
                             Books.map((book) => {
                                 const judul = book.judul;
@@ -54,7 +77,7 @@ const Index = (props) => {
                                                 <h3 className="text-sm font-semibold">
                                                     {res}
                                                 </h3>
-                                                <h1 className="text-lg my-2 text-orange-logo">
+                                                <h1 className=" text-sm md:text-lg lg:text-base my-2 text-orange-logo">
                                                     {harga}
                                                 </h1>
                                             </div>

@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { Link, useForm } from "@inertiajs/inertia-react";
 
-import {
-    AiOutlineAlignLeft,
-    AiOutlineCloseCircle,
-    AiOutlineMenu,
-} from "react-icons/ai";
+import { AiOutlineCloseCircle, AiOutlineMenu } from "react-icons/ai";
 
 import UserLayout from "./UserLayout";
 
@@ -19,8 +15,6 @@ const KatalogLayout = ({ categories, children, title }) => {
         e.preventDefault();
         post(route("user.katalog.cari", data));
     };
-
-    console.log(isOpen);
 
     return (
         <UserLayout>

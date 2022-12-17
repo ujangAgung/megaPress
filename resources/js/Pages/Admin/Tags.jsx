@@ -6,13 +6,36 @@ import AdminLayout from "@/Layouts/AdminLayout";
 
 const Tags = (props) => {
     const Tags = props.tag;
+    const flash = props.flash;
+
+    flash.add &&
+        swal({
+            title: "Berhasil!",
+            text: flash.add,
+            icon: "success",
+            button: "Wokee",
+        });
+    flash.delete &&
+        swal({
+            title: "Dihapus!",
+            text: flash.delete,
+            icon: "warning",
+            button: "Wokee",
+        });
+    flash.edit &&
+        swal({
+            title: "Disunting!",
+            text: flash.edit,
+            icon: "info",
+            button: "Wokee",
+        });
     return (
         <>
             <Head>
                 <title>{props.title}</title>
             </Head>
             <AdminLayout auth={props.auth} title={props.title}>
-                <div className="container mx-auto px-5">
+                <div className="container mx-auto px-5 pt-5">
                     <Link
                         href="/admin/tambah-tag"
                         className="py-2 px-3 font-bold border rounded-xl shadow-2xl border-orange-logo hover:bg-orange-logo hover:text-white"

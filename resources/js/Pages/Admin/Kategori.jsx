@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Head, usePage } from "@inertiajs/inertia-react";
 
 import AdminLayout from "@/Layouts/AdminLayout";
+import Paginator from "@/Components/Paginator";
 
 const KategoriMaster = ({ categories }) => {
     return categories.length > 0
@@ -42,15 +43,40 @@ const KategoriAdmin = ({ categories }) => {
         : "";
 };
 
-const Kategori = (props) => {
-    const Categories = props.kategori;
+const Kategori = () => {
+    const { auth, title, kategori, flash } = usePage().props;
+    const links = kategori.links;
+    const meta = kategori.meta;
+
+    flash.add &&
+        swal({
+            title: "Berhasil!",
+            text: flash.add,
+            icon: "success",
+            button: "Wokee",
+        });
+    flash.delete &&
+        swal({
+            title: "Dihapus!",
+            text: flash.delete,
+            icon: "warning",
+            button: "Wokee",
+        });
+    flash.edit &&
+        swal({
+            title: "Disunting!",
+            text: flash.edit,
+            icon: "info",
+            button: "Wokee",
+        });
+
     return (
         <>
             <Head>
-                <title>{props.title}</title>
+                <title>{title}</title>
             </Head>
-            <AdminLayout auth={props.auth} title={props.title}>
-                <div className="container mx-auto px-5">
+            <AdminLayout auth={auth} title={title}>
+                <div className="container mx-auto px-5 pt-5">
                     <Link
                         href="/admin/tambah-kategori"
                         className="py-2 px-3 font-bold border rounded-xl shadow-2xl border-orange-logo hover:bg-orange-logo hover:text-white"
@@ -59,11 +85,14 @@ const Kategori = (props) => {
                     </Link>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10">
-                        {props.auth.role != "admin" ? (
-                            <KategoriMaster categories={Categories} />
+                        {auth.role != "admin" ? (
+                            <KategoriMaster categories={kategori.data} />
                         ) : (
-                            <KategoriAdmin categories={Categories} />
+                            <KategoriAdmin categories={kategori.data} />
                         )}
+                    </div>
+                    <div className="flex justify-center items-center my-10">
+                        <Paginator links={links} meta={meta} />
                     </div>
                 </div>
             </AdminLayout>
