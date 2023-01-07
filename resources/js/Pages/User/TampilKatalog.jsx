@@ -14,12 +14,13 @@ const TampilKatalog = () => {
         currency: "IDR",
     }).format(nominal);
 
-    const pesan = `https://api.whatsapp.com/send?phone=6281995877769&text=Hai%2C+Saya+akan+membeli%3A%0D%0A%0D%0A*${books.judul}*%0A*Harga:*%20${harga}%0A*URL:*%20https%3A%2F%2Fmegapress.com%2Fkatalog%2F${books.slug}%2F%0D%0A%0D%0ATerima+kasih%21`;
+    const pesan = `https://api.whatsapp.com/send?phone=6281212088836&text=Hai%2C+Saya+akan+membeli%3A%0D%0A%0D%0A*${books.judul}*%0A*Harga:*%20${harga}%0A*URL:*%20https%3A%2F%2Fmegapress.co.id%2Fproduct%2F${books.slug}%2F%0D%0A%0D%0ATerima+kasih%21`;
 
     return (
         <>
             <Head>
                 <title>{data.title}</title>
+                <meta name="description" content={books.judul} />
             </Head>
             <KatalogLayout categories={data.categories} title={data.title}>
                 <div className="p-5">

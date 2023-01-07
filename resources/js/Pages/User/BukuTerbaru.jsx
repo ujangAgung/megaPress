@@ -10,7 +10,10 @@ const BukuTerbaru = (props) => {
                 </h2>
                 {books.length > 0 ? (
                     books.map((book, i) => {
-                        const pesan = `https://web.whatsapp.com/send?phone=6281995877769&text=Hai%2C+Saya+akan+membeli%3A%0D%0A%0D%0A*${book.judul}*%0A*Harga:*%20${book.harga}%0A*URL:*%20https%3A%2F%2Fmegapress.com%2Fproduk%2F${book.slug}%2F%0D%0A%0D%0ATerima+kasih%21`;
+                        const res =
+                            book.sinopsis.length > 250
+                                ? `${book.sinopsis.substring(0, 300)}...`
+                                : book.sinopsis;
                         return (
                             <div
                                 className={
@@ -34,12 +37,14 @@ const BukuTerbaru = (props) => {
                                             {book.judul}
                                         </h4>
                                         <p className="font-extralight mb-5 text-justify">
-                                            {book.sinopsis}
+                                            {res}
                                         </p>
                                         <a
-                                            href={pesan}
+                                            href={route(
+                                                "user.katalog.show",
+                                                book.slug
+                                            )}
                                             className="py-2 px-4 font-semibold rounded-md border border-orange-500 hover:bg-orange-500 hover:text-white"
-                                            target="_blank"
                                         >
                                             Lihat
                                         </a>

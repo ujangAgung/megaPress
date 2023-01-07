@@ -1,10 +1,14 @@
 import React from "react";
-import { Link } from "@inertiajs/inertia-react";
+import { Link, Head } from "@inertiajs/inertia-react";
+import { RiContactsBook2Fill, RiGitRepositoryFill } from "react-icons/ri";
 
 const UserLayout = ({ children }) => {
+    const Route = window.location.href.split("/");
     return (
         <>
-            {/* navbar */}
+            <Head>
+                <link rel="icon" type="image/svg+xml" href="/img/icons.png" />
+            </Head>
             <nav className="fixed bg-white shadow-lg top-0 w-full z-50 invisible md:visible">
                 <div className="container mx-auto flex p-4">
                     <div className="w-7/12">
@@ -19,17 +23,32 @@ const UserLayout = ({ children }) => {
                     <div className="w-5/12 flex items-center justify-end">
                         <ul className="flex space-x-10">
                             <li>
-                                <Link href="/" className="navbar">
+                                <Link
+                                    href="/"
+                                    className={`navbar ${
+                                        Route[3] == "" && "navbar-active"
+                                    }`}
+                                >
                                     Beranda
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/katalog" className="navbar">
+                                <Link
+                                    href={route("user.katalog")}
+                                    className={`navbar ${
+                                        Route[3] == "product" && "navbar-active"
+                                    }`}
+                                >
                                     Katalog
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/kontak" className="navbar">
+                                <Link
+                                    href="/kontak"
+                                    className={`navbar ${
+                                        Route[3] == "kontak" && "navbar-active"
+                                    }`}
+                                >
                                     Kontak
                                 </Link>
                             </li>
@@ -51,13 +70,25 @@ const UserLayout = ({ children }) => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/katalog" className="navbar">
-                                Katalog
+                            <Link
+                                href={route("user.katalog")}
+                                className={`navbar font-bold ${
+                                    Route[3] == "product" && "text-orange-700"
+                                }`}
+                            >
+                                <RiGitRepositoryFill className="mx-auto w-6 h-6" />
+                                <span className="text-xs">Katalog</span>
                             </Link>
                         </li>
                         <li>
-                            <Link href="/kontak" className="navbar">
-                                Kontak
+                            <Link
+                                href="/kontak"
+                                className={`navbar ${
+                                    Route[3] == "kontak" && "text-orange-700"
+                                }`}
+                            >
+                                <RiContactsBook2Fill className="mx-auto w-6 h-6" />
+                                <span className="text-xs">Kontak</span>
                             </Link>
                         </li>
                     </ul>
@@ -78,11 +109,21 @@ const UserLayout = ({ children }) => {
                         />
                     </Link>
                     <p className="font-light">
-                        © 2022
+                        © 2023
                         <strong className="font-bold uppercase ml-2">
                             Mega Press
                         </strong>
                         , All rights reserved.
+                    </p>
+                    <p className="text-sm">
+                        Dibuat dan diterbitkan oleh{" "}
+                        <a
+                            href="https://nusaagency.com/"
+                            target={"_blank"}
+                            className="italic text-blue-600 hover:underline"
+                        >
+                            Nusa Agency
+                        </a>
                     </p>
                 </div>
             </section>

@@ -44,7 +44,7 @@ const Kontak = (props) => {
                         ></iframe>
                         <div>
                             <ul className="grid gap-5 grid-cols-1 md:grid-cols-4 md:grid-rows-2">
-                                <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group hover:bg-orange-logo hover:cursor-pointer md:row-span-1 md:col-span-4">
+                                <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group transition-all hover:-translate-y-1 hover:bg-orange-logo hover:cursor-pointer md:row-span-1 md:col-span-4">
                                     <div className="m-auto group-hover:text-white text-center">
                                         <AiFillEnvironment className="w-16 h-16 mx-auto mb-2 " />
                                         <p>
@@ -60,7 +60,7 @@ const Kontak = (props) => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group hover:bg-orange-logo hover:cursor-pointer">
+                                    <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group transition-all hover:-translate-y-1 hover:bg-orange-logo hover:cursor-pointer">
                                         <div className="m-auto group-hover:text-white">
                                             <AiFillInstagram className="w-16 h-16 mx-auto mb-2 " />
                                             <p>megapressofficial</p>
@@ -72,7 +72,7 @@ const Kontak = (props) => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group hover:bg-orange-logo hover:cursor-pointer">
+                                    <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group transition-all hover:-translate-y-1 hover:bg-orange-logo hover:cursor-pointer">
                                         <div className="m-auto group-hover:text-white">
                                             <AiFillPhone className="w-16 h-16 mx-auto mb-2 " />
                                             <p>0812 1208 8836</p>
@@ -84,7 +84,7 @@ const Kontak = (props) => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group hover:bg-orange-logo hover:cursor-pointer">
+                                    <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group transition-all hover:-translate-y-1 hover:bg-orange-logo hover:cursor-pointer">
                                         <div className="m-auto group-hover:text-white">
                                             <AiFillMail className="w-16 h-16 mx-auto mb-2 " />
                                             <p className="md:text-xs lg:text-base">
@@ -100,7 +100,7 @@ const Kontak = (props) => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group hover:bg-orange-logo hover:cursor-pointer">
+                                    <li className="flex bg-white rounded-xl shadow-xl my-3 p-5 group transition-all hover:-translate-y-1 hover:bg-orange-logo hover:cursor-pointer">
                                         <div className="m-auto group-hover:text-white">
                                             <AiFillFacebook className="w-16 h-16 mx-auto mb-2 " />
                                             <p>Mega Press</p>

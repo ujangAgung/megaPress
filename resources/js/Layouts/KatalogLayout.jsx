@@ -7,9 +7,11 @@ import UserLayout from "./UserLayout";
 
 const KatalogLayout = ({ categories, children, title }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const { data, setData, errors, post } = useForm({
+    const { data, setData, post } = useForm({
         cari: "",
     });
+
+    const uri = window.location.href.split("/");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -105,21 +107,25 @@ const KatalogLayout = ({ categories, children, title }) => {
                                 {categories.length > 0
                                     ? categories.map((category) => {
                                           return (
-                                              <>
-                                                  <Link
-                                                      href={route(
-                                                          "user.katalog.kategori",
-                                                          category.slug
-                                                      )}
-                                                      key={category.id}
-                                                      className="text-start w-full"
+                                              <Link
+                                                  href={route(
+                                                      "user.katalog.kategori",
+                                                      category.slug
+                                                  )}
+                                                  key={category.id}
+                                                  className="text-start w-full"
+                                              >
+                                                  <li
+                                                      className={`py-2 hover:bg-orange-logo hover:text-white rounded-lg hover:pl-3 transition-all ${
+                                                          uri[5] ==
+                                                              category.slug &&
+                                                          "bg-orange-logo text-white -translate-x-1 pl-3"
+                                                      }`}
                                                   >
-                                                      <li className="py-2 hover:bg-orange-logo hover:text-white rounded-lg hover:pl-3">
-                                                          {category.deskripsi}
-                                                      </li>
-                                                      <hr />
-                                                  </Link>
-                                              </>
+                                                      {category.deskripsi}
+                                                  </li>
+                                                  <hr />
+                                              </Link>
                                           );
                                       })
                                     : ""}

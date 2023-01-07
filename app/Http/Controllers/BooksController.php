@@ -24,9 +24,7 @@ class BooksController extends Controller
         return Inertia::render('User/index', [
             'title' => 'Home',
             'description' => "Mega Press adalah Penerbit buku di Indonesia yang berdiri pada Tahun 2022, yang sudah memiliki ISBN dan terdaftar sebagai Anggota IKAPI. Bertempatkan di Sumedang Bandung Jawa Barat Indonesia",
-            // 'books' => Books::all()
-            // orderBy('id', 'desc')->take(5)->get();
-            'books' => Books::latest()->take(5)->get()
+            'books' => Books::orderBy('cetakan', 'desc')->take(5)->get()
         ]);
     }
 

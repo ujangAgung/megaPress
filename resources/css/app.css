@@ -14,4 +14,8 @@
     .navbar {
         @apply font-semibold uppercase hover:text-orange-logo hover:underline;
     }
+
+    .navbar-active {
+        @apply underline text-orange-logo;
+    }
 }

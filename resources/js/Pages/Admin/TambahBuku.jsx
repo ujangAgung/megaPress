@@ -8,8 +8,8 @@ const TambahBuku = (props) => {
     const tags = props.tags;
     const { data, setData, errors, post } = useForm({
         judul: "",
-        gambar: null,
-        harga: null,
+        gambar: "",
+        // harga: ,
         penulis: "",
         cetakan: "",
         isbn: "ISBN belum terbit",

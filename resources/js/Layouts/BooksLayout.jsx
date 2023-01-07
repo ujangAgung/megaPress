@@ -25,7 +25,7 @@ const BooksLayout = ({ books, links, meta }) => {
                             <Link
                                 href={route("user.katalog.show", book.slug)}
                                 key={book.id}
-                                className="rounded-lg hover:shadow-xl"
+                                className="rounded-lg transition-all hover:-translate-y-1 active:translate-y-1 hover:shadow-xl bg-white"
                             >
                                 <div>
                                     <div className="flex justify-center items-center">

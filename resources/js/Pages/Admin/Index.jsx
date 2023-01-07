@@ -4,6 +4,7 @@ import AdminLayout from "@/Layouts/AdminLayout";
 import Paginator from "@/Components/Paginator";
 
 const Index = (props) => {
+    // console.log(route().current("admin"));
     const Books = props.books.data;
     const meta = props.books.meta;
     const links = props.books.links;
